@@ -9,7 +9,7 @@
 > 使用npm run build 编译文件。部署在nginx服务器下
 
 ## server config
-> download nginx
+> ## Download nginx
 ````
     server {
         listen       10000;
