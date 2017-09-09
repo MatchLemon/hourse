@@ -15,10 +15,10 @@
         listen       10000;
         server_name  localhost;
         location / {
-                 proxy_pass   http://localhost:8088;
-            }
+            proxy_pass   http://localhost:8088;
+        }
         location /api/ {
-                 proxy_pass   http://www.dingshengfangchan.com/api/;
+            proxy_pass   http://www.dingshengfangchan.com/api/;
         }
     }
  ````
