@@ -18,7 +18,7 @@
             proxy_pass   http://localhost:8088;
         }
         location /api/ {
-            proxy_pass   `http://www.dingshengfangchan.com/api/`;
+            proxy_pass   http://www.dingshengfangchan.com/api/;
         }
     }
  ````
