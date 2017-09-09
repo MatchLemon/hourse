@@ -11,7 +11,7 @@
 ## server config
 > download nginx
 ````
-	server {
+    server {
         listen       10000;
         server_name  localhost;
         location / {
