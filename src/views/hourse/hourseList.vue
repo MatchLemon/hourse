@@ -7,26 +7,26 @@
 					<el-input v-model="filters.name" placeholder="标题"></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" v-on:click="getUsers">查询</el-button>
+					<el-button type="primary" v-on:click="getHourse">查询</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+		<el-table :data="hourse" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
 			<el-table-column type="selection" width="55">
 			</el-table-column>
 			<el-table-column type="index" width="60">
 			</el-table-column>
 			<el-table-column prop="name" label="标题" width="120">
 			</el-table-column>
-			<el-table-column prop="sex" label="房屋面积" width="100" :formatter="formatSex">
+			<el-table-column prop="acreage" label="房屋面积" width="100">
 			</el-table-column>
-			<el-table-column prop="age" label="联系电话" width="100">
+			<el-table-column prop="houseOwnerPhone" label="联系电话" width="150">
 			</el-table-column>
-			<el-table-column prop="birth" label="交易状态" width="120" sortable>
+			<el-table-column prop="status" label="交易状态" width="130" sortable>
 			</el-table-column>
-			<el-table-column prop="addr" label="地址" min-width="180" >
+			<el-table-column prop="address" label="地址" min-width="150" >
 
 			</el-table-column>
 			<el-table-column label="操作" width="150">
@@ -105,7 +105,7 @@
 <script>
 	import util from '../../common/js/util'
 	//import NProgress from 'nprogress'
-	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
+	import { getHourseListPage, deleteHourse, batchRemoveUser, editUser, addUser } from '../../api/api';
 
 	export default {
 		data() {
@@ -161,19 +161,22 @@
 			},
 			handleCurrentChange(val) {
 				this.page = val;
-				this.getUsers();
+				this.getHourse();
 			},
 			//获取用户列表
-			getUsers() {
+			getHourse() {
+				let user = JSON.parse(sessionStorage.getItem('user'))
 				let para = {
-					page: this.page,
-					name: this.filters.name
+					pageNumber: this.page - 1,
+					name: this.filters.name,
+					pageSize:20,
+					userId: user.id
 				};
 				this.listLoading = true;
 				//NProgress.start();
-				getUserListPage(para).then((res) => {
+				getHourseListPage(para).then((res) => {
 					this.total = res.data.total;
-					this.users = res.data.users;
+					this.hourse = res.data.data;
 					this.listLoading = false;
 					//NProgress.done();
 				});
@@ -185,15 +188,17 @@
 				}).then(() => {
 					this.listLoading = true;
 					//NProgress.start();
-					let para = { id: row.id };
-					removeUser(para).then((res) => {
+					let para = {hourseId: row.id};
+					deleteHourse(para).then((res) => {
 						this.listLoading = false;
-						//NProgress.done();
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
-						this.getUsers();
+						if(res.data.status == 200) {
+							this.$message({
+								message: '删除成功',
+								type: 'success'
+							});
+							this.getHourse();
+						}
+						
 					});
 				}).catch(() => {
 
@@ -222,7 +227,7 @@
 								});
 								this.$refs['editForm'].resetFields();
 								this.editFormVisible = false;
-								this.getUsers();
+								this.getHourse();
 							});
 						});
 					}
@@ -246,7 +251,7 @@
 								});
 								this.$refs['addForm'].resetFields();
 								this.addFormVisible = false;
-								this.getUsers();
+								this.getHourse();
 							});
 						});
 					}
@@ -271,7 +276,7 @@
 							message: '删除成功',
 							type: 'success'
 						});
-						this.getUsers();
+						this.getHourse();
 					});
 				}).catch(() => {
 
@@ -279,7 +284,7 @@
 			}
 		},
 		mounted() {
-			this.getUsers();
+			this.getHourse();
 		}
 	}
 

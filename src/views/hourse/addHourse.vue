@@ -1,5 +1,5 @@
 <template>
-	<el-form ref="hProperty" :model="hProperty" label-width="80px" @submit.prevent="onSubmit" style="margin:20px;width:60%;min-width:600px;">
+	<el-form ref="hProperty" :model="hProperty" label-width="80px" style="margin:20px;width:60%;min-width:600px;">
 		<el-form-item label="房产标题">
 			<el-input v-model="hProperty.name"></el-input>
 		</el-form-item>
@@ -45,22 +45,23 @@
 				<el-radio label="否" value="0" ></el-radio>
 			</el-radio-group>
 		</el-form-item>
-		<el-form-item label="添加图片">
-			<el-radio-upload>
-
-			</el-radio-upload>
-		</el-form-item>
 		<el-form-item label="房屋详细信息">
 			<el-input type="textarea" v-model="hProperty.desc"></el-input>
 		</el-form-item>
 		<el-form-item>
-			<el-button type="primary">立即创建</el-button>
+			<el-button type="primary" @click.native="onSubmit" >立即创建</el-button>
 			<el-button @click.native.prevent>取消</el-button>
 		</el-form-item>
 	</el-form>
 </template>
 
 <script>
+import { saveHourse } from '../../api/api';
+		//<el-form-item label="添加图片">
+		//	<el-radio-upload name="">
+
+		//	</el-radio-upload>
+		//</el-form-item>
 	export default {
 		data() {
 			return {
@@ -79,7 +80,30 @@
 		},
 		methods: {
 			onSubmit() {
-				console.log('submit!');
+			let user = JSON.parse(sessionStorage.getItem('user'))
+				var hourse = {
+					houseOwnerName : this.hProperty.name,
+					//images : this.hProperty.pic,
+					images : [],
+					price : this.hProperty.unitPrice,
+					acreage : this.hProperty.area,
+					address : this.hProperty.addr,
+					houseOwnerPhone : this.hProperty.phone,
+					status : this.hProperty.status,
+					infomation : this.hProperty.desc,
+					state : this.hProperty.sellWay,
+					userId : user.id
+				}
+				saveHourse(hourse).then((res) => {
+					if (res.data.status == 200 ) {
+						this.$router.push({ path: '/hourseList' });
+						this.$message({
+			                 message: '添加成功',
+			                 type: 'success'
+		            	});
+					}
+						//NProgress.done();
+				});
 			}
 		}
 	}

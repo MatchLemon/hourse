@@ -25,8 +25,8 @@
       return {
         logining: false,
         ruleForm2: {
-          account: 'chao',
-          checkPass: 'abc123_'
+          account: 'xuhui',
+          checkPass: 'xuhui'
         },
         rules2: {
           account: [
@@ -62,17 +62,19 @@
             this.logining = true;
             //NProgress.start();
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-            requestLogin(loginParams).then(data => {
+            requestLogin(loginParams).then(data1 => {
               this.logining = false;
               //NProgress.done();
-              let { msg, code, user } = data;
+              console.log(data1);
+              let { msg, code, data } = data1;
+              var user = data;
               if (code !== 200) {
                 this.$message({
                   message: msg,
                   type: 'error'
                 });
               } else {
-                console.log(user);
+                user['avatar'] = 'https://avatars0.githubusercontent.com/u/12583493?v=4&s=40';
                 sessionStorage.setItem('user', JSON.stringify(user));
                 this.$router.push({ path: '/userList' });
               }

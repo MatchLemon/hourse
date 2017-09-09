@@ -54,7 +54,7 @@ let routes = [
         children: [
 
             {
-                path: '/hourseLisr',
+                path: '/hourseList',
                 component: resolve => require(['./views/hourse/hourseList.vue'], resolve),
                 name: '房产列表'
             },
