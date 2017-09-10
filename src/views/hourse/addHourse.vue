@@ -1,17 +1,20 @@
 <template>
     <el-form ref="hProperty" :model="hProperty" label-width="100px" style="margin:20px ;width:60%; min-width:600px;">
         <el-form-item label="房产标题">
+            <el-input v-model="hProperty.title"></el-input>
+        </el-form-item>
+        <el-form-item label="发布者">
             <el-input v-model="hProperty.name"></el-input>
         </el-form-item>
 
-        <el-form-item label="房屋照片">
+    <!--     <el-form-item label="房屋照片">
             <el-input v-model="hProperty.pic"></el-input>
-        </el-form-item>
+        </el-form-item> -->
 
         <el-form-item label="租售">
             <el-radio-group v-model="hProperty.sellWay">
-                <el-radio label="出租" value="rent" ></el-radio>
-                <el-radio label="出售" value="sell"></el-radio>
+                <el-radio :label="1" value="rent" >出租</el-radio>
+                <el-radio :label="0" value="sell">出售</el-radio>
             </el-radio-group>
         </el-form-item>
 
@@ -51,15 +54,18 @@
         <div class="upload-block">
             <div class="source">
                 <el-upload
-                  action="http://upload-z1.qiniu.com"
+                  action="http://up-z0.qiniu.com"
                   list-type="picture-card"
                   :on-preview="handlePictureCardPreview"
-                  :on-remove="handleRemove">
-                  :data="postData"
+                  :on-remove="handleRemove"
+                  :on-success="uploadSuccess"
+                  :data="postData">
                   <i class="el-icon-plus"></i>
             </el-upload>
             </div>
-
+            <el-dialog v-model="dialogVisible" size="tiny">
+                <img width="100%" :src="dialogImageUrl" alt="">
+            </el-dialog>
         </div>
 
         </el-form-item>
@@ -102,16 +108,30 @@ import { saveHourse } from '../../api/api';
                 dialogVisible: false,
                 postData : {
                     token:'tjuC6AiIgDsL-QYYAR0XCdUITLou4EX28BgcqcaY:BEOz78la9EhXrz_M416vozD8Hno=:eyJzY29wZSI6InRlc3QtaG91cnNlIiwiZGVhZGxpbmUiOjE1MDUwNDU5MzF9'
-                }
+                },
+                images:[]
             }
         },
         methods: {
+            addImages(str) {
+                this.images.push(str);
+            },
+            delImages(str) {
+                var tmp = this.images;
+                this.images.forEach((item, index) => {
+                    if (item == str) {
+                        tmp.splice(index,1);
+                    }
+                });
+                this.images = tmp;
+            },
             onSubmit() {
             let user = JSON.parse(sessionStorage.getItem('user'))
                 var hourse = {
                     houseOwnerName : this.hProperty.name,
+                    title : this.hProperty.title,
                     //images : this.hProperty.pic,
-                    images : [],
+                    images : this.images,
                     price : this.hProperty.unitPrice,
                     acreage : this.hProperty.area,
                     address : this.hProperty.addr,
@@ -132,8 +152,14 @@ import { saveHourse } from '../../api/api';
                         //NProgress.done();
                 });
             },
+            uploadSuccess(res, file, fileList) {
+                this.dialogImageUrl = 'http://ow1fx96vf.bkt.clouddn.com/' + res.key;
+                this.addImages(file.response.key);
+                console.log(this.images);
+            },
             handleRemove(file, fileList) {
-                    console.log(file, fileList);
+                this.delImages(file.response.key);
+                console.log(this.images);
             },
             handlePictureCardPreview(file) {
                 this.dialogImageUrl = file.url;
