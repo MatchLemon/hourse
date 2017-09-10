@@ -46,11 +46,11 @@
 
         <!--编辑界面-->
         <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
-            <el-form ref="hProperty" :model="hProperty" label-width="100px" style="margin:20px ;width:60%; min-width:600px;">
-                <el-form-item label="房产标题">
+            <el-form ref="hProperty" :model="hProperty" :rules="hourseFormRules" label-width="100px" style="margin:20px ;width:60%; min-width:600px;" >
+                <el-form-item label="房产标题" prop="title">
                     <el-input v-model="hProperty.title"></el-input>
                 </el-form-item>
-                <el-form-item label="发布者">
+                <el-form-item label="发布者" prop="houseOwnerName">
                     <el-input v-model="hProperty.houseOwnerName"></el-input>
                 </el-form-item>
 
@@ -65,19 +65,19 @@
                     </el-radio-group>
                 </el-form-item>
 
-                <el-form-item label="租售单价">
+                <el-form-item label="租售单价" prop="price">
                     <el-input v-model="hProperty.price"></el-input>
                 </el-form-item>
 
-                <el-form-item label="房屋面积">
+                <el-form-item label="房屋面积" prop="acreage">
                     <el-input v-model="hProperty.acreage"></el-input>
                 </el-form-item>
 
-                <el-form-item label="房屋地址">
+                <el-form-item label="房屋地址" prop="address">
                     <el-input v-model="hProperty.address"></el-input>
                 </el-form-item>
 
-                <el-form-item label="联系电话">
+                <el-form-item label="联系电话" prop="houseOwnerPhone">
                     <el-input v-model="hProperty.houseOwnerPhone"></el-input>
                 </el-form-item>
 
@@ -179,9 +179,24 @@
 
                 editFormVisible: false,//编辑界面是否显示
                 editLoading: false,
-                editFormRules: {
-                    name: [
-                        { required: true, message: '请输入姓名', trigger: 'blur' }
+                hourseFormRules: {
+                    title: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    houseOwnerName: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    price: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    acreage: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    address: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    houseOwnerPhone: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
                     ]
                 },
                 //编辑界面数据
@@ -206,6 +221,7 @@
                         { required: true, message: '请输入姓名', trigger: 'blur' }
                     ]
                 },
+
                 //新增界面数据
                 addForm: {
                     name: '',
