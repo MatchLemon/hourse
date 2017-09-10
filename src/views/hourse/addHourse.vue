@@ -88,6 +88,7 @@
 </style>
 <script>
 import { saveHourse } from '../../api/api';
+import constants from '../../common/js/constants'
 
     export default {
         data() {
@@ -107,7 +108,7 @@ import { saveHourse } from '../../api/api';
                 dialogImageUrl: '',
                 dialogVisible: false,
                 postData : {
-                    token:'tjuC6AiIgDsL-QYYAR0XCdUITLou4EX28BgcqcaY:BEOz78la9EhXrz_M416vozD8Hno=:eyJzY29wZSI6InRlc3QtaG91cnNlIiwiZGVhZGxpbmUiOjE1MDUwNDU5MzF9'
+                    token: constants.qiniuToken
                 },
                 images:[]
             }
@@ -155,11 +156,9 @@ import { saveHourse } from '../../api/api';
             uploadSuccess(res, file, fileList) {
                 this.dialogImageUrl = 'http://ow1fx96vf.bkt.clouddn.com/' + res.key;
                 this.addImages(file.response.key);
-                console.log(this.images);
             },
             handleRemove(file, fileList) {
                 this.delImages(file.response.key);
-                console.log(this.images);
             },
             handlePictureCardPreview(file) {
                 this.dialogImageUrl = file.url;

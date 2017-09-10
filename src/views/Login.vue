@@ -25,8 +25,8 @@
       return {
         logining: false,
         ruleForm2: {
-          account: 'xuhui',
-          checkPass: 'xuhui'
+          account: '',
+          checkPass: ''
         },
         rules2: {
           account: [
