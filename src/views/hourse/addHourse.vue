@@ -13,8 +13,8 @@
 
         <el-form-item label="租售">
             <el-radio-group v-model="hProperty.sellWay">
-                <el-radio :label="1" value="rent" >出租</el-radio>
-                <el-radio :label="0" value="sell">出售</el-radio>
+                <el-radio :label="1">出租</el-radio>
+                <el-radio :label="0">出售</el-radio>
             </el-radio-group>
         </el-form-item>
 

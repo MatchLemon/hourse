@@ -24,7 +24,7 @@
             </el-table-column>
             <el-table-column prop="houseOwnerPhone" label="联系电话" width="150">
             </el-table-column>
-            <el-table-column prop="status" label="交易状态" width="130" sortable>
+            <el-table-column prop="status" label="交易状态" width="130" :formatter="formatStatus" sortable>
             </el-table-column>
             <el-table-column prop="address" label="地址" min-width="150" >
 
@@ -222,9 +222,21 @@
             }
         },
         methods: {
-            //性别显示转换
-            formatSex: function (row, column) {
-                return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
+            formatStatus: function (row, column) {
+                var result = "未知";
+                if (row.status == 0) {
+                    return "已打电话"
+                }
+                if (row.status == 1) {
+                    result = "交易中";
+                }
+                if (row.status == 2) {
+                    result = "已付款";
+                }
+                if (row.status == 3) {
+                    result = "已完成";
+                }
+                return result;
             },
             handleCurrentChange(val) {
                 this.page = val;
