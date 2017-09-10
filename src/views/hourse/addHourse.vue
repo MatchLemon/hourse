@@ -1,5 +1,5 @@
 <template>
-    <el-form ref="hProperty" :model="hProperty" label-width="80px" style="margin:20px;width:60%;min-width:600px;">
+    <el-form ref="hProperty" :model="hProperty" label-width="100px" style="margin:20px ;width:60%; min-width:600px;">
         <el-form-item label="房产标题">
             <el-input v-model="hProperty.name"></el-input>
         </el-form-item>
@@ -48,13 +48,20 @@
         </el-form-item>
 
         <el-form-item label="添加图片">
-            <el-upload
-              action="https://jsonplaceholder.typicode.com/posts/"
-              list-type="picture-card"
-              :on-preview="handlePictureCardPreview"
-              :on-remove="handleRemove">
-              <i class="el-icon-plus"></i>
+        <div class="upload-block">
+            <div class="source">
+                <el-upload
+                  action="http://upload-z1.qiniu.com"
+                  list-type="picture-card"
+                  :on-preview="handlePictureCardPreview"
+                  :on-remove="handleRemove">
+                  :data="postData"
+                  <i class="el-icon-plus"></i>
             </el-upload>
+            </div>
+
+        </div>
+
         </el-form-item>
         <el-form-item label="房屋详细信息">
             <el-input type="textarea" v-model="hProperty.desc"></el-input>
@@ -65,7 +72,14 @@
         </el-form-item>
     </el-form>
 </template>
+<style lang="scss" scoped>
+    .upload-block {
+        border: 1px solid #eaeefb;
+        border-radius: 4px;
+        padding: 24px;
+    }
 
+</style>
 <script>
 import { saveHourse } from '../../api/api';
 
@@ -85,7 +99,10 @@ import { saveHourse } from '../../api/api';
                     isPublic: 1
                 },
                 dialogImageUrl: '',
-                dialogVisible: false
+                dialogVisible: false,
+                postData : {
+                    token:'tjuC6AiIgDsL-QYYAR0XCdUITLou4EX28BgcqcaY:BEOz78la9EhXrz_M416vozD8Hno=:eyJzY29wZSI6InRlc3QtaG91cnNlIiwiZGVhZGxpbmUiOjE1MDUwNDU5MzF9'
+                }
             }
         },
         methods: {
