@@ -228,8 +228,6 @@
             //新增
             addSubmit: function () {
                 this.$refs.addForm.validate((valid) => {
-                    console.log(valid);
-                    return ;
                     if (valid) {
                         this.$confirm('确认提交吗？', '提示', {}).then(() => {
                             this.addLoading = true;
