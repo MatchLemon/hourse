@@ -270,7 +270,7 @@
                 this.listLoading = true;
                 //NProgress.start();
                 getHourseListPage(para).then((res) => {
-                    this.total = res.data.total;
+                    this.total = res.data.totalCount;
                     this.hourse = res.data.data;
                     this.listLoading = false;
                     //NProgress.done();
