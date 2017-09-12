@@ -303,6 +303,8 @@
             handleEdit: function (index, row) {
                 this.editFormVisible = true;
                 this.hProperty = Object.assign(this.hProperty, row);
+                this.hProperty.price =  this.hProperty.price + "";
+                this.hProperty.acreage =  this.hProperty.acreage + "";
             },
             //编辑
             editSubmit: function () {
