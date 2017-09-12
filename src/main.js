@@ -14,6 +14,7 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 
@@ -30,6 +31,7 @@ router.beforeEach((to, from, next) => {
       console.log(to.path);
       if (to.path == '/userList') {
          next({path: '/hourseList'});
+         next(false);
       }
     }
     next()
