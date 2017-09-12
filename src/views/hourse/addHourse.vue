@@ -1,9 +1,9 @@
 <template>
-    <el-form ref="hProperty" :model="hProperty" :rules="hourseFormRules" label-width="100px" style="margin:20px ;width:60%; min-width:600px;" >
-        <el-form-item label="房产标题" prop="title">
+    <el-form ref="hProperty" :model="hProperty" label-width="100px" style="margin:20px ;width:60%; min-width:600px;">
+        <el-form-item label="房产标题">
             <el-input v-model="hProperty.title"></el-input>
         </el-form-item>
-        <el-form-item label="发布者" prop="name">
+        <el-form-item label="发布者">
             <el-input v-model="hProperty.name"></el-input>
         </el-form-item>
 
@@ -18,19 +18,19 @@
             </el-radio-group>
         </el-form-item>
 
-        <el-form-item label="租售单价" prop="unitPrice">
+        <el-form-item label="租售单价">
             <el-input v-model="hProperty.unitPrice"></el-input>
         </el-form-item>
 
-        <el-form-item label="房屋面积" prop="area">
+        <el-form-item label="房屋面积">
             <el-input v-model="hProperty.area"></el-input>
         </el-form-item>
 
-        <el-form-item label="房屋地址" prop="addr">
+        <el-form-item label="房屋地址">
             <el-input v-model="hProperty.addr"></el-input>
         </el-form-item>
 
-        <el-form-item label="联系电话" prop="phone">
+        <el-form-item label="联系电话">
             <el-input v-model="hProperty.phone"></el-input>
         </el-form-item>
 
@@ -110,26 +110,6 @@ import constants from '../../common/js/constants'
                 postData : {
                     token: constants.qiniuToken
                 },
-                hourseFormRules: {
-                    title: [
-                        { required: true, message: '请输此字段', trigger: 'blur' }
-                    ],
-                    name: [
-                        { required: true, message: '请输此字段', trigger: 'blur' }
-                    ],
-                    area: [
-                        { required: true, message: '请输此字段', trigger: 'blur' }
-                    ],
-                    unitPrice: [
-                        { required: true, message: '请输此字段', trigger: 'blur' }
-                    ],
-                    addr: [
-                        { required: true, message: '请输此字段', trigger: 'blur' }
-                    ],
-                    phone: [
-                        { required: true, message: '请输此字段', trigger: 'blur' }
-                    ]
-                },
                 images:[]
             }
         },
@@ -147,34 +127,30 @@ import constants from '../../common/js/constants'
                 this.images = tmp;
             },
             onSubmit() {
-                this.$refs.hProperty.validate((valid) => {
-                    if (valid) {
-                        let user = JSON.parse(sessionStorage.getItem('user'))
-                            var hourse = {
-                                houseOwnerName : this.hProperty.name,
-                                title : this.hProperty.title,
-                                //images : this.hProperty.pic,
-                                images : this.images,
-                                price : this.hProperty.unitPrice,
-                                acreage : this.hProperty.area,
-                                address : this.hProperty.addr,
-                                houseOwnerPhone : this.hProperty.phone,
-                                status : this.hProperty.status,
-                                infomation : this.hProperty.desc,
-                                state : this.hProperty.sellWay,
-                                userId : user.id
-                            }
-                            saveHourse(hourse).then((res) => {
-                                if (res.data.status == 200 ) {
-                                    this.$router.push({ path: '/hourseList' });
-                                    this.$message({
-                                         message: '添加成功',
-                                         type: 'success'
-                                    });
-                                }
-                                    //NProgress.done();
-                            });
+            let user = JSON.parse(sessionStorage.getItem('user'))
+                var hourse = {
+                    houseOwnerName : this.hProperty.name,
+                    title : this.hProperty.title,
+                    //images : this.hProperty.pic,
+                    images : this.images,
+                    price : this.hProperty.unitPrice,
+                    acreage : this.hProperty.area,
+                    address : this.hProperty.addr,
+                    houseOwnerPhone : this.hProperty.phone,
+                    status : this.hProperty.status,
+                    infomation : this.hProperty.desc,
+                    state : this.hProperty.sellWay,
+                    userId : user.id
+                }
+                saveHourse(hourse).then((res) => {
+                    if (res.data.status == 200 ) {
+                        this.$router.push({ path: '/hourseList' });
+                        this.$message({
+                             message: '添加成功',
+                             type: 'success'
+                        });
                     }
+                        //NProgress.done();
                 });
             },
             uploadSuccess(res, file, fileList) {

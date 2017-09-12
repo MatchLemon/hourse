@@ -72,16 +72,16 @@
         <!--新增界面-->
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-                <el-form-item label="姓名" prop="username">
-                    <el-input type="text" v-model="addForm.username" auto-complete="off"></el-input>
+                <el-form-item label="姓名" prop="name">
+                    <el-input v-model="addForm.username" auto-complete="off"></el-input>
                 </el-form-item>
 
-                <el-form-item label="密码" prop="password">
-                    <el-input type="text" v-model="addForm.password" auto-complete="off"></el-input>
+                <el-form-item label="密码" prop="name">
+                    <el-input v-model="addForm.password" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="类型">
                     <el-radio-group v-model="addForm.type">
-                        <el-radio class="radio" :label="1">管理员</el-radio>
+                        <el-radio class="radio" :label="1" >管理员</el-radio>
                         <el-radio class="radio" :label="0">业务员</el-radio>
                     </el-radio-group>
                 </el-form-item>
@@ -228,8 +228,6 @@
             //新增
             addSubmit: function () {
                 this.$refs.addForm.validate((valid) => {
-                    console.log(valid);
-                    return ;
                     if (valid) {
                         this.$confirm('确认提交吗？', '提示', {}).then(() => {
                             this.addLoading = true;
