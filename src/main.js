@@ -26,6 +26,11 @@ router.beforeEach((to, from, next) => {
   if (!user && to.path != '/login') {
     next({ path: '/login' })
   } else {
+    if (user.type != 1) {
+      if (to.path == '/userList') {
+         next({ path: '/hourseList'});
+      }
+    }
     next()
   }
 })
