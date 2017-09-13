@@ -48,3 +48,12 @@ export const getHourseListPage = params => {
     delete params['userId'];
     return axios.post(url, params);
 };
+export const getQiniuToken = () => {
+    var url = `${base}/token/index.php?r=getToken`;
+    return axios.get(url);
+};
+
+export const getDomain = () => {
+    var url = `${base}/token/index.php?r=getDomain`;
+    return axios.get(url);
+};

@@ -101,11 +101,12 @@
                 <div class="upload-block">
                     <div class="source">
                         <el-upload
-                          action="http://up-z0.qiniu.com"
+                          action="http://up-z1.qiniu.com"
                           list-type="picture-card"
                           :on-preview="handlePictureCardPreview"
                           :on-remove="handleRemove"
                           :on-success="uploadSuccess"
+                          :file-list="imagesList"
                           :data="postData">
                           <i class="el-icon-plus"></i>
                     </el-upload>
@@ -163,7 +164,7 @@
     import util from '../../common/js/util'
     import constants from '../../common/js/constants'
     //import NProgress from 'nprogress'
-    import { getHourseListPage, deleteHourse, edithourse} from '../../api/api';
+    import {getQiniuToken, getDomain, getHourseListPage, deleteHourse, edithourse} from '../../api/api';
 
     export default {
         data() {
@@ -175,7 +176,9 @@
                 total: 0,
                 page: 1,
                 listLoading: false,
-                sels: [],//列表选中列
+                sels:[],
+                qiniuDomain: "",
+                qiniuToken: "",
 
                 editFormVisible: false,//编辑界面是否显示
                 editLoading: false,
@@ -233,7 +236,8 @@
                 postData : {
                     token: constants.qiniuToken
                 },
-                images:[]
+                images:[],
+                imagesList:[]
 
             }
         },
@@ -258,7 +262,7 @@
                 this.page = val;
                 this.getHourse();
             },
-            //获取用户列表
+            //获取hourse
             getHourse() {
                 let user = JSON.parse(sessionStorage.getItem('user'))
                 let para = {
@@ -270,7 +274,7 @@
                 this.listLoading = true;
                 //NProgress.start();
                 getHourseListPage(para).then((res) => {
-                    this.total = res.data.total;
+                    this.total = res.data.totalCount;
                     this.hourse = res.data.data;
                     this.listLoading = false;
                     //NProgress.done();
@@ -303,6 +307,12 @@
             handleEdit: function (index, row) {
                 this.editFormVisible = true;
                 this.hProperty = Object.assign(this.hProperty, row);
+                this.hProperty.price =  this.hProperty.price + "";
+                this.hProperty.acreage =  this.hProperty.acreage + "";
+                //this.images = this.hProperty.images;
+                //console.log(this.hProperty.images);
+                this.images = this.hProperty.images;
+                this.imagesList = this.hProperty.images.map(function(item){return {"url":item};});
             },
             //编辑
             editSubmit: function () {
@@ -312,6 +322,7 @@
                             this.editLoading = true;
                             //NProgress.start();
                             let para = Object.assign({}, this.hProperty);
+                            para.images = this.images
                             edithourse(para).then((res) => {
                                 this.editLoading = false;
                                 //NProgress.done();
@@ -353,13 +364,17 @@
                 });
             },
             uploadSuccess(res, file, fileList) {
-                this.dialogImageUrl = 'http://ow1fx96vf.bkt.clouddn.com/' + res.key;
-                this.addImages(file.response.key);
-                console.log(this.images);
+                this.dialogImageUrl = this.qiniuDomain + '/' + res.key;
+                console.log(file);
+                this.addImages(this.dialogImageUrl);
             },
             handleRemove(file, fileList) {
-                this.delImages(file.response.key);
-                console.log(this.images);
+                if (file.response == undefined) {
+                    this.delImages(file.url);
+                } else {
+                    this.delImages(this.qiniuDomain + '/' + file.response.key);
+                }
+
             },
             handlePictureCardPreview(file) {
                 this.dialogImageUrl = file.url;
@@ -376,11 +391,20 @@
                     }
                 });
                 this.images = tmp;
+            },
+            init() {
+                getDomain({}).then((res) => {
+                    this.qiniuDomain = res.data.domain
+                });
+                getQiniuToken({}).then((res) => {
+                    this.qiniuToken = res.data.token
+                    this.postData.token = this.qiniuToken;
+                });
             }
-
         },
         mounted() {
             this.getHourse();
+            this.init();
         },
 
 

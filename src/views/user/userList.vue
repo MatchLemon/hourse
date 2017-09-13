@@ -153,12 +153,13 @@
             getUsers() {
                 let para = {
                     page: this.page,
+                    pageSize:20,
                     name: this.filters.name
                 };
                 this.listLoading = true;
                 //NProgress.start();
                 getUserListPage(para).then((res) => {
-                    this.total = res.data.total;
+                    this.total = res.data.totalCount;
                     this.users = res.data.data;
                     this.listLoading = false;
                     //NProgress.done();
@@ -228,8 +229,6 @@
             //新增
             addSubmit: function () {
                 this.$refs.addForm.validate((valid) => {
-                    console.log(valid);
-                    return ;
                     if (valid) {
                         this.$confirm('确认提交吗？', '提示', {}).then(() => {
                             this.addLoading = true;
