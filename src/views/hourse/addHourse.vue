@@ -54,7 +54,7 @@
         <div class="upload-block">
             <div class="source">
                 <el-upload
-                  action="http://up-z0.qiniu.com"
+                  action="http://up-z1.qiniu.com"
                   list-type="picture-card"
                   :on-preview="handlePictureCardPreview"
                   :on-remove="handleRemove"
@@ -87,7 +87,7 @@
 
 </style>
 <script>
-import { saveHourse } from '../../api/api';
+import {saveHourse, getQiniuToken, getDomain} from '../../api/api';
 import constants from '../../common/js/constants'
 
     export default {
@@ -108,8 +108,10 @@ import constants from '../../common/js/constants'
                 dialogImageUrl: '',
                 dialogVisible: false,
                 postData : {
-                    token: constants.qiniuToken
+                    token: this.qiniuToken
                 },
+                qiniuDomain: "",
+                qiniuToken: "",
                 hourseFormRules: {
                     title: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
@@ -178,17 +180,34 @@ import constants from '../../common/js/constants'
                 });
             },
             uploadSuccess(res, file, fileList) {
-                this.dialogImageUrl = 'http://ow1fx96vf.bkt.clouddn.com/' + res.key;
-                this.addImages(file.response.key);
+                this.dialogImageUrl = this.qiniuDomain + '/' + res.key;
+                this.addImages(this.dialogImageUrl);
             },
             handleRemove(file, fileList) {
-                this.delImages(file.response.key);
+                if (file.response == undefined) {
+                    this.delImages(file.url);
+                } else {
+                    this.delImages(this.qiniuDomain + '/' + file.response.key);
+                }
+
             },
             handlePictureCardPreview(file) {
                 this.dialogImageUrl = file.url;
                 this.dialogVisible = true;
+            },
+            init() {
+                getDomain({}).then((res) => {
+                    this.qiniuDomain = res.data.domain
+                });
+                getQiniuToken({}).then((res) => {
+                    this.qiniuToken = res.data.token
+                    this.postData.token = this.qiniuToken;
+                });
             }
-        }
+        },
+        mounted() {
+            this.init();
+        },
     }
 
 </script>
