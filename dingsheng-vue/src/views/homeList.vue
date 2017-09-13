@@ -1,6 +1,10 @@
 
  <template>
  <el-row>
+   <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane label="出租房源" name="first"></el-tab-pane>
+    <el-tab-pane label="二手房源" name="second"></el-tab-pane>
+  </el-tabs>
     <listcomponent 
       v-for="(item, index) in items"
       v-bind:item="item"
@@ -12,10 +16,10 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="currentPage4"
-      :page-sizes="[100, 200, 300, 400]"
-      :page-size="100"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="10"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="400" class="paginator">
+      :total="40" class="paginator">
     </el-pagination>
   </div>
 </el-row>
@@ -71,6 +75,9 @@ export default {
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
       },
+      handleClick(tab, event) {
+        console.log(tab.index, event);
+      },
       get_data (params) {
       if (!params) params = {}
       this.$api.get('topics', params, r => {
@@ -81,8 +88,8 @@ export default {
   data() {
     return {
           items: ["src/assets/pic-pd-3.png","skjgh","adasd","萨德安分","年语法二维","的HIA月让饿哦儒雅我诶发"],
-          currentPage4: 4
-
+          currentPage4: 4,
+          activeName: 'second'
     };
   },
   components: {listcomponent},
