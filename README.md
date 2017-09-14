@@ -24,3 +24,12 @@
  ````
  > ## vsdftp ssh
  配置ssh 在 `～/.ssh/authorized_keys ` 
+> ## profile
+export JAVA_HOME=/usr/application/jdk1.8.0_144
+export M2_HOME=/usr/application/apache-maven-3.5.0
+export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
+export JRE_HOME=$JAVA_HOME/jre
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+> CronTab
+ '0 */2 * * * /srv/hourse/home-backend/build.sh>>/srv/hourse/home-backend/build-log.log'
