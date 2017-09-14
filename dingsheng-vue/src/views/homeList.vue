@@ -89,7 +89,7 @@ export default {
     return {
           items: ["src/assets/pic-pd-3.png","skjgh","adasd","萨德安分","年语法二维","的HIA月让饿哦儒雅我诶发"],
           currentPage4: 4,
-          activeName: 'second'
+          activeName: 'first'
     };
   },
   components: {listcomponent},
