@@ -22,3 +22,5 @@
         }
     }
  ````
+ > ## vsdftp ssh
+ 配置ssh 在 `～/.ssh/authorized_keys ` 
