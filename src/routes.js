@@ -13,20 +13,7 @@ import NotFound from './views/404.vue'
 // import addHourse from '/views/hourse/addHourse.vue'
 
 //import echarts from './views/charts/echarts.vue'
-
-let routes = [
-    {
-        path: '/login',
-        component: resolve => require(['./views/Login.vue'], resolve),
-        name: '',
-        hidden: true
-    },
-    {
-        path: '/404',
-        component: NotFound,
-        name: '',
-        hidden: true
-    },
+let adminRouters = [
     {
         path: '/',
         component: resolve => require(['./views/Home.vue'], resolve),
@@ -45,6 +32,21 @@ let routes = [
                 name: '用户列表'
             },
         ]
+    }
+
+];
+let routes = [
+    {
+        path: '/login',
+        component: resolve => require(['./views/Login.vue'], resolve),
+        name: '',
+        hidden: true
+    },
+    {
+        path: '/404',
+        component: NotFound,
+        name: '',
+        hidden: true
     },
     {
         path: '/',
@@ -104,5 +106,7 @@ let routes = [
         redirect: { path: '/404' }
     }
 ];
+let allRouters = Object.assign([], routes);
+allRouters.push.apply(allRouters, adminRouters);
 
-export default routes;
+export default routes = {'adminRouters': adminRouters, 'commRouter': routes, 'allRoutes': allRouters};

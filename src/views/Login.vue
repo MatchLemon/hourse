@@ -1,5 +1,5 @@
 <template>
-  <div :style='logbg'>
+  <div :style='logbg'  @keyup="enter($event)">
     <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
       <h3 class="title">房产后台登录</h3>
       <el-form-item prop="account">
@@ -19,6 +19,7 @@
 
 <script>
   import { requestLogin } from '../api/api';
+  import routes from '../routes'
   //import NProgress from 'nprogress'
   export default {
     data() {
@@ -51,6 +52,11 @@
       };
     },
     methods: {
+      enter(ev) {
+        if(ev.keyCode == 13){
+          this.handleSubmit2();
+        }
+      },
       handleReset2() {
         this.$refs.ruleForm2.resetFields();
       },
@@ -64,7 +70,6 @@
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
             requestLogin(loginParams).then(data1 => {
               this.logining = false;
-              //NProgress.done();
               console.log(data1);
               let { msg, code, data } = data1;
               var user = data;
@@ -75,8 +80,16 @@
                 });
               } else {
                 user['avatar'] = 'https://avatars0.githubusercontent.com/u/12583493?v=4&s=40';
+                if (user.type == 1 ) {
+                  _this.$router.addRoutes(routes.adminRouters)
+                  _this.$router.options.routes = routes.allRoutes
+                  this.$router.push({ path: '/userList' });
+                } else {
+                    _this.$router.addRoutes(routes.commRouter)
+                    _this.$router.options.routes = routes.commRouter
+                    this.$router.push({ path: '/hourseList' });
+                }
                 sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/userList' });
               }
             });
           } else {

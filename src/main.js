@@ -15,7 +15,7 @@ Vue.use(Vuex)
 
 const router = new VueRouter({
   mode: 'history',
-  routes
+  routes: routes.commRouter
 })
 
 router.beforeEach((to, from, next) => {
