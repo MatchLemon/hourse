@@ -65,6 +65,20 @@ let routes = [
             },
         ]
     },
+    {
+        path: '/',
+        component: resolve => require(['./views/Home.vue'], resolve),
+        name: 'Setting',
+        iconCls: 'el-icon-setting',
+        children :[
+            {
+                path: '/setting',
+                component: resolve => require(['./views/setting/setting.vue'], resolve),
+                name: 'Profile'
+            }
+        ]
+
+    },
     // {
     //     path: '/',
     //     component: Home,
