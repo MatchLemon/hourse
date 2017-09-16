@@ -61,13 +61,14 @@
 export default {
   data() {
     return {
+
     }
 
   },
-  props: ['message'],
+  props: ['houseId','message'],
   methods: {
     detail: function (event) {
-      this.$router.push({ path: '/detail' });
+      this.$router.push({ path: '/detail/' + this.houseId });
     }
   }
 }
@@ -183,25 +184,5 @@ a {
   margin-top: 20px;
 }
 /*分页*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </style>

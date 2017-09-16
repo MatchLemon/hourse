@@ -10,6 +10,7 @@
       v-bind:item="item"
       v-bind:index="index"
       v-bind:message="item"
+      v-bind:houseId=101
      ></listcomponent>
   <div class="block">
     <el-pagination
