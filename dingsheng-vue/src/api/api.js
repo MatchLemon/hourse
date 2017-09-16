@@ -1,5 +1,5 @@
 // 配置API接口地址
-var root = process.env.API_ROOT
+var root = 'http://10.0.60.121:8080/'
 // 引用axios
 var axios = require('axios')
 // 自定义判断元素类型JS
@@ -45,17 +45,18 @@ function apiAxios (method, url, params, success, failure) {
     withCredentials: false
   })
   .then(function (res) {
-    if (res.data.success === true) {
-      if (success) {
-        success(res.data)
-      }
-    } else {
-      if (failure) {
-        failure(res.data)
-      } else {
-        window.alert('error: ' + JSON.stringify(res.data))
-      }
-    }
+    console.log('submit!');
+    // if (res.data.success === true) {
+    //   if (success) {
+    //     success(res.data)
+    //   }
+    // } else {
+    //   if (failure) {
+    //     failure(res.data)
+    //   } else {
+    //     window.alert('error: ' + JSON.stringify(res.data))
+    //   }
+    // }
   })
   .catch(function (err) {
     let res = err.response

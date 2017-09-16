@@ -345,41 +345,27 @@ li, ol, ul {
     margin: 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>
+
+<script>
+export default {
+   methods: {
+      get_data (params) {
+      if (!params) params = {}
+      this.$api.get('/v3/products/11737', params, r => {
+        this.lists = r.data
+      })
+    }
+    },
+  data() {
+    return {
+
+    };
+  },
+   created () {
+    // 组件创建完后获取数据，
+    // 此时 data 已经被 observed 了
+    this.get_data()
+  }
+}
+</script>
