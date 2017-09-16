@@ -47,79 +47,95 @@
         <!--编辑界面-->
         <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
             <el-form ref="hProperty" :model="hProperty" :rules="houseFormRules" label-width="100px" style="margin:20px ;width:60%; min-width:600px;" >
-                <el-form-item label="房产标题" prop="title">
-                    <el-input v-model="hProperty.title"></el-input>
-                </el-form-item>
-                <el-form-item label="发布者" prop="houseOwnerName">
-                    <el-input v-model="hProperty.houseOwnerName"></el-input>
-                </el-form-item>
+                    <el-form-item label="房产标题" prop="title">
+                        <el-input v-model="hProperty.title"></el-input>
+                    </el-form-item>
+                    <el-form-item label="发布者" prop="name">
+                        <el-input v-model="hProperty.name"></el-input>
+                    </el-form-item>
 
-            <!--     <el-form-item label="房屋照片">
-                    <el-input v-model="hProperty.pic"></el-input>
-                </el-form-item> -->
+                <!--     <el-form-item label="房屋照片">
+                        <el-input v-model="hProperty.pic"></el-input>
+                    </el-form-item> -->
 
-                <el-form-item label="租售">
-                    <el-radio-group v-model="hProperty.state">
-                        <el-radio :label="1" value="rent" >出租</el-radio>
-                        <el-radio :label="0" value="sell">出售</el-radio>
-                    </el-radio-group>
-                </el-form-item>
+                    <el-form-item label="房屋总价" prop="totalPrice">
+                        <el-input v-model="hProperty.totalPrice"></el-input>
+                    </el-form-item>
+                    <el-form-item label="参考价格(M^2/￥)" prop="refPrice">
+                        <el-input v-model="hProperty.refPrice"></el-input>
+                    </el-form-item>
+                    <el-form-item label="房屋面积" prop="area">
+                        <el-input v-model="hProperty.area"></el-input>
+                    </el-form-item>
+                    </el-form-item>
+                    <el-form-item label="交易权属" prop="tradingRight">
+                        <el-input v-model="hProperty.tradingRight"></el-input>
+                    </el-form-item>
+                    <el-form-item label="户型" prop="houseType">
+                        <el-input v-model="hProperty.houseType"></el-input>
+                    </el-form-item>
+                    <el-form-item label="房屋朝向" prop="houseOrientation">
+                        <el-input v-model="hProperty.houseOrientation"></el-input>
+                    </el-form-item>
+                    <el-form-item label="所在楼层" prop="floor">
+                        <el-input v-model="hProperty.floor"></el-input>
+                    </el-form-item>
+                    <el-form-item label="装修情况" prop="decorate">
+                        <el-input v-model="hProperty.decorate"></el-input>
+                    </el-form-item>
+                    <el-form-item label="产权年限" prop="equityYear">
+                        <el-input v-model="hProperty.equityYear"></el-input>
+                    </el-form-item>
+                    <el-form-item label="建筑年代" prop="buildYear">
+                        <el-input v-model="hProperty.buildYear"></el-input>
+                    </el-form-item>
 
-                <el-form-item label="租售单价" prop="price">
-                    <el-input v-model="hProperty.price"></el-input>
-                </el-form-item>
+                    <el-form-item label="房屋地址" prop="addr">
+                        <el-input v-model="hProperty.addr"></el-input>
+                    </el-form-item>
 
-                <el-form-item label="房屋面积" prop="acreage">
-                    <el-input v-model="hProperty.acreage"></el-input>
-                </el-form-item>
+                    <el-form-item label="联系电话" prop="phone">
+                        <el-input v-model="hProperty.phone"></el-input>
+                    </el-form-item>
 
-                <el-form-item label="房屋地址" prop="address">
-                    <el-input v-model="hProperty.address"></el-input>
-                </el-form-item>
+                    <el-form-item label="交易状态">
+                        <el-select v-model="hProperty.status" placeholder="请选择状态">
+                            <el-option label="已打电话" value="0"></el-option>
+                            <el-option label="交易中" value="1"></el-option>
+                            <el-option label="已付款" value="2"></el-option>
+                            <el-option label="已完成" value="3"></el-option>
+                        </el-select>
+                    </el-form-item>
 
-                <el-form-item label="联系电话" prop="houseOwnerPhone">
-                    <el-input v-model="hProperty.houseOwnerPhone"></el-input>
-                </el-form-item>
+                    <el-form-item label="是否公开">
+                        <el-radio-group v-model="hProperty.isPublic">
+                            <el-radio :label="1" >是</el-radio>
+                            <el-radio :label="0" >否</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
 
-                <el-form-item label="交易状态">
-                    <el-select v-model="hProperty.status" placeholder="请选择状态">
-                        <el-option :key="0" label="已打电话" :value="0"></el-option>
-                        <el-option :key="0" label="交易中" :value="1"></el-option>
-                        <el-option :key="0" label="已付款" :value="2"></el-option>
-                        <el-option :key="0" label="已完成" :value="3"></el-option>
-                    </el-select>
-                </el-form-item>
-
-                <el-form-item label="是否公开">
-                    <el-radio-group v-model="hProperty.isPublic">
-                        <el-radio :label="1" >是</el-radio>
-                        <el-radio :label="0" >否</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-
-                <el-form-item label="添加图片">
-                <div class="upload-block">
-                    <div class="source">
-                        <el-upload
-                          action="http://up-z1.qiniu.com"
-                          list-type="picture-card"
-                          :on-preview="handlePictureCardPreview"
-                          :on-remove="handleRemove"
-                          :on-success="uploadSuccess"
-                          :file-list="imagesList"
-                          :data="postData">
-                          <i class="el-icon-plus"></i>
-                    </el-upload>
+                    <el-form-item label="添加图片">
+                    <div class="upload-block">
+                        <div class="source">
+                            <el-upload
+                              action="http://up-z1.qiniu.com"
+                              list-type="picture-card"
+                              :on-preview="handlePictureCardPreview"
+                              :on-remove="handleRemove"
+                              :on-success="uploadSuccess"
+                              :data="postData">
+                              <i class="el-icon-plus"></i>
+                        </el-upload>
+                        </div>
+                        <el-dialog v-model="dialogVisible" size="tiny">
+                            <img width="100%" :src="dialogImageUrl" alt="">
+                        </el-dialog>
                     </div>
-                    <el-dialog v-model="dialogVisible" size="tiny">
-                        <img width="100%" :src="dialogImageUrl" alt="">
-                    </el-dialog>
-                </div>
 
-                </el-form-item>
-                <el-form-item label="房屋详细信息">
-                    <el-input type="textarea" v-model="hProperty.desc"></el-input>
-                </el-form-item>
+                    </el-form-item>
+                    <el-form-item label="房屋详细信息">
+                        <el-input type="textarea" v-model="hProperty.desc"></el-input>
+                    </el-form-item>
                 <el-form-item>
                     <el-button @click.native="editFormVisible = false">取消</el-button>
                     <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
@@ -156,32 +172,67 @@
                     title: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    houseOwnerName: [
+                    name: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    price: [
+                    area: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    acreage: [
+                    totalPrice: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    address: [
+                    refPrice: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    houseOwnerPhone: [
+                    tradingRight: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    houseType: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    houseOrientation: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    tradingRight: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    floor: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    decorate: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    equityYear: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    buildYear: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    addr: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    phone: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ]
                 },
                 //编辑界面数据
                 hProperty: {
-                    houseOwnerName: '',
-                    price: '',
-                    acreage: '',
-                    address: '',
-                    houseOwnerPhone: '',
+                    title:'',
+                    name: '',
+                    totalPrice:'',
+                    refPrice:'',
+                    area: '',
+                    tradingRight:'',
+                    houseType:'',
+                    houseOrientation:'',
+                    floor:'',
+                    decorate:'',
+                    equityYear:'',
+                    buildYear:'',
+                    addr: '',
+                    phone: '',
                     status: '',
-                    infomation: '',
-                    state: '',
+                    desc: '',
                     isPublic: 1
                 },
                 dialogImageUrl: '',

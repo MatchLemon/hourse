@@ -127,10 +127,25 @@ import constants from '../../common/js/constants'
                     name: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
+                    rentPrice: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    rentMethod: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    houseOrientation: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    houseType: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    floor: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
                     area: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    unitPrice: [
+                    decorate: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
                     addr: [

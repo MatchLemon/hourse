@@ -50,43 +50,47 @@
                 <el-form-item label="房产标题" prop="title">
                     <el-input v-model="hProperty.title"></el-input>
                 </el-form-item>
-                <el-form-item label="发布者" prop="houseOwnerName">
-                    <el-input v-model="hProperty.houseOwnerName"></el-input>
+                <el-form-item label="发布者" prop="name">
+                    <el-input v-model="hProperty.name"></el-input>
                 </el-form-item>
 
-            <!--     <el-form-item label="房屋照片">
-                    <el-input v-model="hProperty.pic"></el-input>
-                </el-form-item> -->
-
-                <el-form-item label="租售">
-                    <el-radio-group v-model="hProperty.state">
-                        <el-radio :label="1" value="rent" >出租</el-radio>
-                        <el-radio :label="0" value="sell">出售</el-radio>
-                    </el-radio-group>
+                <el-form-item label="租赁价位" prop="rentPrice">
+                    <el-input v-model="hProperty.rentPrice"></el-input>
+                </el-form-item>
+                 <el-form-item label="租赁方式" prop="rentMethod">
+                    <el-input v-model="hProperty.rentMethod"></el-input>
+                </el-form-item>
+                <el-form-item label="房屋朝向" prop="houseOrientation">
+                    <el-input v-model="hProperty.houseOrientation"></el-input>
+                </el-form-item>
+                 <el-form-item label="房屋楼层" prop="floor">
+                    <el-input v-model="hProperty.floor"></el-input>
+                </el-form-item>
+                <el-form-item label="户型" prop="houseType">
+                    <el-input v-model="hProperty.houseType"></el-input>
+                </el-form-item>
+                <el-form-item label="装修情况" prop="decorate">
+                    <el-input v-model="hProperty.decorate"></el-input>
                 </el-form-item>
 
-                <el-form-item label="租售单价" prop="price">
-                    <el-input v-model="hProperty.price"></el-input>
+                <el-form-item label="房屋面积" prop="area">
+                    <el-input v-model="hProperty.area"></el-input>
                 </el-form-item>
 
-                <el-form-item label="房屋面积" prop="acreage">
-                    <el-input v-model="hProperty.acreage"></el-input>
+                <el-form-item label="房屋地址" prop="addr">
+                    <el-input v-model="hProperty.addr"></el-input>
                 </el-form-item>
 
-                <el-form-item label="房屋地址" prop="address">
-                    <el-input v-model="hProperty.address"></el-input>
-                </el-form-item>
-
-                <el-form-item label="联系电话" prop="houseOwnerPhone">
-                    <el-input v-model="hProperty.houseOwnerPhone"></el-input>
+                <el-form-item label="联系电话" prop="phone">
+                    <el-input v-model="hProperty.phone"></el-input>
                 </el-form-item>
 
                 <el-form-item label="交易状态">
                     <el-select v-model="hProperty.status" placeholder="请选择状态">
-                        <el-option :key="0" label="已打电话" :value="0"></el-option>
-                        <el-option :key="0" label="交易中" :value="1"></el-option>
-                        <el-option :key="0" label="已付款" :value="2"></el-option>
-                        <el-option :key="0" label="已完成" :value="3"></el-option>
+                        <el-option label="已打电话" value="0"></el-option>
+                        <el-option label="交易中" value="1"></el-option>
+                        <el-option label="已付款" value="2"></el-option>
+                        <el-option label="已完成" value="3"></el-option>
                     </el-select>
                 </el-form-item>
 
@@ -106,7 +110,6 @@
                           :on-preview="handlePictureCardPreview"
                           :on-remove="handleRemove"
                           :on-success="uploadSuccess"
-                          :file-list="imagesList"
                           :data="postData">
                           <i class="el-icon-plus"></i>
                     </el-upload>
@@ -156,32 +159,52 @@
                     title: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    houseOwnerName: [
+                    name: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    price: [
+                    rentPrice: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    acreage: [
+                    rentMethod: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    address: [
+                    houseOrientation: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    houseOwnerPhone: [
+                    houseType: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    floor: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    area: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    decorate: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    addr: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    phone: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ]
                 },
                 //编辑界面数据
                 hProperty: {
-                    houseOwnerName: '',
-                    price: '',
-                    acreage: '',
-                    address: '',
-                    houseOwnerPhone: '',
+                    title:'',
+                    name: '',
+                    rentPrice:'',
+                    rentMethod:'',
+                    houseOrientation:'',
+                    houseType:'',
+                    floor:'',
+                    decorate:'',
+                    area:'',
+                    addr: '',
+                    phone: '',
                     status: '',
-                    infomation: '',
-                    state: '',
+                    desc: '',
                     isPublic: 1
                 },
                 dialogImageUrl: '',
@@ -268,8 +291,6 @@
             handleEdit: function (index, row) {
                 this.editFormVisible = true;
                 this.hProperty = Object.assign(this.hProperty, row);
-                this.hProperty.price =  this.hProperty.price + "";
-                this.hProperty.acreage =  this.hProperty.acreage + "";
                 //this.images = this.hProperty.images;
                 //console.log(this.hProperty.images);
                 this.images = this.hProperty.images;
