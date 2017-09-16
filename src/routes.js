@@ -9,13 +9,13 @@ import NotFound from './views/404.vue'
 // // import Page5 from './views/nav2/Page5.vue'
 // // import Page6 from './views/nav3/Page6.vue'
 // import userList from './views/user/userList.vue'
-// import hourseList from './views/hourse/hourseList.vue'
-// import addHourse from '/views/hourse/addHourse.vue'
+// import houseList from './views/house/houseList.vue'
+// import addhouse from '/views/house/addhouse.vue'
 
 //import echarts from './views/charts/echarts.vue'
 let adminRouters = [
     {
-        path: '/',
+        path: '/admin/',
         component: resolve => require(['./views/Home.vue'], resolve),
         name: '用户管理',
         iconCls: 'el-icon-message',//图标样式class
@@ -37,7 +37,7 @@ let adminRouters = [
 ];
 let routes = [
         {
-        path: '/list',
+        path: '/',
         component: resolve => require(['./views/front/homeList.vue'], resolve),
         name: '',
         hidden: true
@@ -70,13 +70,13 @@ let routes = [
         children: [
 
             {
-                path: '/hourseList',
-                component: resolve => require(['./views/hourse/hourseList.vue'], resolve),
-                name: '房产列表'
+                path: '/admin/rentList',
+                component: resolve => require(['./views/house/rentList.vue'], resolve),
+                name: '租赁列表'
             },
             {
-                path: '/addHourse',
-                component: resolve => require(['./views/hourse/addHourse.vue'], resolve),
+                path: '/admin/addRenthouse',
+                component: resolve => require(['./views/house/rentAddhouse.vue'], resolve),
                 name: '添加房产'
             },
         ]
@@ -89,13 +89,13 @@ let routes = [
         children: [
 
             {
-                path: '/hourseList',
-                component: resolve => require(['./views/hourse/hourseList.vue'], resolve),
+                path: '/admin/houseList',
+                component: resolve => require(['./views/house/houseList.vue'], resolve),
                 name: '房产列表'
             },
             {
-                path: '/addHourse',
-                component: resolve => require(['./views/hourse/addHourse.vue'], resolve),
+                path: '/admin/addhouse',
+                component: resolve => require(['./views/house/addhouse.vue'], resolve),
                 name: '添加房产'
             },
         ]
@@ -107,7 +107,7 @@ let routes = [
         iconCls: 'el-icon-setting',
         children :[
             {
-                path: '/setting',
+                path: '/admin/setting',
                 component: resolve => require(['./views/setting/setting.vue'], resolve),
                 name: 'Profile'
             }

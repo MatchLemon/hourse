@@ -1,5 +1,5 @@
 <template>
-    <el-form ref="hProperty" :model="hProperty" :rules="hourseFormRules" label-width="100px" style="margin:20px ;width:60%; min-width:600px;" >
+    <el-form ref="hProperty" :model="hProperty" :rules="houseFormRules" label-width="100px" style="margin:20px ;width:60%; min-width:600px;" >
         <el-form-item label="房产标题" prop="title">
             <el-input v-model="hProperty.title"></el-input>
         </el-form-item>
@@ -11,19 +11,36 @@
             <el-input v-model="hProperty.pic"></el-input>
         </el-form-item> -->
 
-        <el-form-item label="租售">
-            <el-radio-group v-model="hProperty.sellWay">
-                <el-radio :label="1">出租</el-radio>
-                <el-radio :label="0">出售</el-radio>
-            </el-radio-group>
+        <el-form-item label="房屋总价" prop="totalPrice">
+            <el-input v-model="hProperty.totalPrice"></el-input>
         </el-form-item>
-
-        <el-form-item label="租售单价" prop="unitPrice">
-            <el-input v-model="hProperty.unitPrice"></el-input>
+        <el-form-item label="参考价格(M^2/￥)" prop="refPrice">
+            <el-input v-model="hProperty.refPrice"></el-input>
         </el-form-item>
-
         <el-form-item label="房屋面积" prop="area">
             <el-input v-model="hProperty.area"></el-input>
+        </el-form-item>
+        </el-form-item>
+        <el-form-item label="交易权属" prop="tradingRight">
+            <el-input v-model="hProperty.tradingRight"></el-input>
+        </el-form-item>
+        <el-form-item label="户型" prop="houseType">
+            <el-input v-model="hProperty.houseType"></el-input>
+        </el-form-item>
+        <el-form-item label="房屋朝向" prop="houseOrientation">
+            <el-input v-model="hProperty.houseOrientation"></el-input>
+        </el-form-item>
+        <el-form-item label="所在楼层" prop="floor">
+            <el-input v-model="hProperty.floor"></el-input>
+        </el-form-item>
+        <el-form-item label="装修情况" prop="decorate">
+            <el-input v-model="hProperty.decorate"></el-input>
+        </el-form-item>
+        <el-form-item label="产权年限" prop="equityYear">
+            <el-input v-model="hProperty.equityYear"></el-input>
+        </el-form-item>
+        <el-form-item label="建筑年代" prop="buildYear">
+            <el-input v-model="hProperty.buildYear"></el-input>
         </el-form-item>
 
         <el-form-item label="房屋地址" prop="addr">
@@ -87,22 +104,29 @@
 
 </style>
 <script>
-import {saveHourse, getQiniuToken, getDomain} from '../../api/api';
+import {savehouse, getQiniuToken, getDomain} from '../../api/api';
 import constants from '../../common/js/constants'
 
     export default {
         data() {
             return {
                 hProperty: {
+                    title:'',
                     name: '',
-                    pic: '',
-                    unitPrice: '',
+                    totalPrice:'',
+                    refPrice:'',
                     area: '',
+                    tradingRight:'',
+                    houseType:'',
+                    houseOrientation:'',
+                    floor:'',
+                    decorate:'',
+                    equityYear:'',
+                    buildYear:'',
                     addr: '',
                     phone: '',
                     status: '',
                     desc: '',
-                    sellWay: '',
                     isPublic: 1
                 },
                 dialogImageUrl: '',
@@ -112,7 +136,7 @@ import constants from '../../common/js/constants'
                 },
                 qiniuDomain: "",
                 qiniuToken: "",
-                hourseFormRules: {
+                houseFormRules: {
                     title: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
@@ -122,7 +146,34 @@ import constants from '../../common/js/constants'
                     area: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    unitPrice: [
+                    totalPrice: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    refPrice: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    tradingRight: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    houseType: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    houseOrientation: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    tradingRight: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    floor: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    decorate: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    equityYear: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    buildYear: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
                     addr: [
@@ -152,23 +203,23 @@ import constants from '../../common/js/constants'
                 this.$refs.hProperty.validate((valid) => {
                     if (valid) {
                         let user = JSON.parse(sessionStorage.getItem('user'))
-                            var hourse = {
-                                houseOwnerName : this.hProperty.name,
-                                title : this.hProperty.title,
-                                //images : this.hProperty.pic,
-                                images : this.images,
-                                price : this.hProperty.unitPrice,
-                                acreage : this.hProperty.area,
-                                address : this.hProperty.addr,
-                                houseOwnerPhone : this.hProperty.phone,
-                                status : this.hProperty.status,
-                                infomation : this.hProperty.desc,
-                                state : this.hProperty.sellWay,
-                                userId : user.id
-                            }
-                            saveHourse(hourse).then((res) => {
+                            // var house = {
+                            //     houseOwnerName : this.hProperty.name,
+                            //     title : this.hProperty.title,
+                            //     //images : this.hProperty.pic,
+                            //     images : this.images,
+                            //     price : this.hProperty.unitPrice,
+                            //     acreage : this.hProperty.area,
+                            //     address : this.hProperty.addr,
+                            //     houseOwnerPhone : this.hProperty.phone,
+                            //     status : this.hProperty.status,
+                            //     infomation : this.hProperty.desc,
+                            //     state : this.hProperty.sellWay,
+                            //     userId : user.id
+                            // }
+                            savehouse(Object.assign([], this.hProperty)).then((res) => {
                                 if (res.data.status == 200 ) {
-                                    this.$router.push({ path: '/hourseList' });
+                                    this.$router.push({ path: '/houseList' });
                                     this.$message({
                                          message: '添加成功',
                                          type: 'success'

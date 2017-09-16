@@ -55,6 +55,7 @@
       enter(ev) {
         if(ev.keyCode == 13){
           this.handleSubmit2();
+          return false;
         }
       },
       handleReset2() {
@@ -83,11 +84,11 @@
                 if (user.type == 1 ) {
                   _this.$router.addRoutes(routes.adminRouters)
                   _this.$router.options.routes = routes.allRoutes
-                  this.$router.push({ path: '/userList' });
+                  this.$router.push({path: '/userList'});
                 } else {
                     _this.$router.addRoutes(routes.commRouter)
                     _this.$router.options.routes = routes.commRouter
-                    this.$router.push({ path: '/hourseList' });
+                    this.$router.push({ path: '/houseList' });
                 }
                 sessionStorage.setItem('user', JSON.stringify(user));
               }

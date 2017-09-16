@@ -7,13 +7,13 @@
                     <el-input v-model="filters.name" placeholder="标题"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" v-on:click="getHourse">查询</el-button>
+                    <el-button type="primary" v-on:click="gethouse">查询</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
 
         <!--列表-->
-        <el-table :data="hourse" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+        <el-table :data="house" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
             <el-table-column type="selection" width="55">
             </el-table-column>
             <el-table-column type="index" width="60">
@@ -46,7 +46,7 @@
 
         <!--编辑界面-->
         <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
-            <el-form ref="hProperty" :model="hProperty" :rules="hourseFormRules" label-width="100px" style="margin:20px ;width:60%; min-width:600px;" >
+            <el-form ref="hProperty" :model="hProperty" :rules="houseFormRules" label-width="100px" style="margin:20px ;width:60%; min-width:600px;" >
                 <el-form-item label="房产标题" prop="title">
                     <el-input v-model="hProperty.title"></el-input>
                 </el-form-item>
@@ -134,7 +134,7 @@
     import util from '../../common/js/util'
     import constants from '../../common/js/constants'
     //import NProgress from 'nprogress'
-    import {getQiniuToken, getDomain, getHourseListPage, deleteHourse, edithourse} from '../../api/api';
+    import {getQiniuToken, getDomain, gethouseListPage, deletehouse, edithouse} from '../../api/api';
 
     export default {
         data() {
@@ -142,7 +142,7 @@
                 filters: {
                     name: ''
                 },
-                hourse: [],
+                house: [],
                 total: 0,
                 page: 1,
                 listLoading: false,
@@ -152,7 +152,7 @@
 
                 editFormVisible: false,//编辑界面是否显示
                 editLoading: false,
-                hourseFormRules: {
+                houseFormRules: {
                     title: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
@@ -221,10 +221,10 @@
             },
             handleCurrentChange(val) {
                 this.page = val;
-                this.getHourse();
+                this.gethouse();
             },
-            //获取hourse
-            getHourse() {
+            //获取house
+            gethouse() {
                 let user = JSON.parse(sessionStorage.getItem('user'))
                 let para = {
                     pageNumber: this.page - 1,
@@ -234,9 +234,9 @@
                 };
                 this.listLoading = true;
                 //NProgress.start();
-                getHourseListPage(para).then((res) => {
+                gethouseListPage(para).then((res) => {
                     this.total = res.data.totalCount;
-                    this.hourse = res.data.data;
+                    this.house = res.data.data;
                     this.listLoading = false;
                     //NProgress.done();
                 });
@@ -248,15 +248,15 @@
                 }).then(() => {
                     this.listLoading = true;
                     //NProgress.start();
-                    let para = {hourseId: row.id};
-                    deleteHourse(para).then((res) => {
+                    let para = {houseId: row.id};
+                    deletehouse(para).then((res) => {
                         this.listLoading = false;
                         if(res.data.status == 200) {
                             this.$message({
                                 message: '删除成功',
                                 type: 'success'
                             });
-                            this.getHourse();
+                            this.gethouse();
                         }
 
                     });
@@ -284,7 +284,7 @@
                             //NProgress.start();
                             let para = Object.assign({}, this.hProperty);
                             para.images = this.images
-                            edithourse(para).then((res) => {
+                            edithouse(para).then((res) => {
                                 this.editLoading = false;
                                 //NProgress.done();
                                 this.$message({
@@ -293,7 +293,7 @@
                                 });
                                 this.$refs['hProperty'].resetFields();
                                 this.editFormVisible = false;
-                                this.getHourse();
+                                this.gethouse();
                             });
                         });
                     }
@@ -318,7 +318,7 @@
                             message: '删除成功',
                             type: 'success'
                         });
-                        this.getHourse();
+                        this.gethouse();
                     });
                 }).catch(() => {
 
@@ -363,7 +363,7 @@
             }
         },
         mounted() {
-            this.getHourse();
+            this.gethouse();
             this.init();
         },
 

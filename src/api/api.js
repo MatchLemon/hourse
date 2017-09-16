@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let base = 'http://172.17.2.146:8080';
+let base = '';
 
 export const requestLogin = params => {
     return axios.post(`${base}/api/login`, params).then(
@@ -30,20 +30,20 @@ export const addUser = params => {
     return axios.post(`${base}/api/account`, params);
 };
 
-export const deleteHourse = params => {
-    var url = `${base}/api/delete/` + params.hourseId
+export const deletehouse = params => {
+    var url = `${base}/api/delete/` + params.houseId
     return axios.delete(url, {});
 };
 
-export const saveHourse = params => {
+export const savehouse = params => {
     return axios.post(`${base}/api/hourse/create`, params);
 };
 
-export const edithourse = params => {
+export const edithouse = params => {
     return axios.put(`${base}/api/update`, params);
 };
 
-export const getHourseListPage = params => {
+export const gethouseListPage = params => {
     var url = `${base}/api/hourses/` +  params.userId;
     delete params['userId'];
     return axios.post(url, params);

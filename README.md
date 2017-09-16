@@ -1,4 +1,4 @@
-# vue-hourse
+# vue-house
 
 ## 项目运行
 -* 1 git clobe remote url
@@ -23,7 +23,7 @@
     }
  ````
  > ## vsdftp ssh
- 配置ssh 在 `～/.ssh/authorized_keys ` 
+ 配置ssh 在 `～/.ssh/authorized_keys `
 > ## profile
 export JAVA_HOME=/usr/application/jdk1.8.0_144
 export M2_HOME=/usr/application/apache-maven-3.5.0
@@ -32,4 +32,4 @@ export JRE_HOME=$JAVA_HOME/jre
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 
 > CronTab
- '0 */2 * * * /srv/hourse/home-backend/build.sh>>/srv/hourse/home-backend/build-log.log'
+ '0 */2 * * * /srv/house/home-backend/build.sh>>/srv/house/home-backend/build-log.log'
