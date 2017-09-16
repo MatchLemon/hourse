@@ -16,7 +16,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
+      :current-page="currentPage"
       :page-sizes="[10, 20, 30, 40]"
       :page-size="10"
       layout="total, sizes, prev, pager, next, jumper"
@@ -74,9 +74,11 @@ export default {
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
+        this.currentPage = val
+        console.log(this.currentPage);
       },
       handleClick(tab, event) {
+        this.houseType = tab.index
         console.log(tab.index, event);
       },
       get_data (params) {
@@ -89,8 +91,9 @@ export default {
   data() {
     return {
           items: ["src/assets/pic-pd-3.png","skjgh","adasd","萨德安分","年语法二维","的HIA月让饿哦儒雅我诶发"],
-          currentPage4: 4,
-          activeName: 'first'
+          currentPage: 4,
+          activeName: 'first',
+          houseType: 1
     };
   },
   components: {listcomponent},
