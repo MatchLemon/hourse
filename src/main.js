@@ -18,25 +18,25 @@ const router = new VueRouter({
   routes: routes.commRouter
 })
 
-router.beforeEach((to, from, next) => {
-  //NProgress.start();
-  if (to.path == '/login') {
-    sessionStorage.removeItem('user');
-  }
-  let user = JSON.parse(sessionStorage.getItem('user'));
-  if (!user && to.path != '/login') {
-    next({ path: '/login' })
-  } else {
-    if (user && user.type != 1) {
-      console.log(to.path);
-      if (to.path == '/userList') {
-         next({path: '/hourseList'});
-         next(false);
-      }
-    }
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   //NProgress.start();
+//   if (to.path == '/login') {
+//     sessionStorage.removeItem('user');
+//   }
+//   let user = JSON.parse(sessionStorage.getItem('user'));
+//   if (!user && to.path != '/list') {
+//     next({ path: '/list' })
+//   } else {
+//     if (user && user.type != 1) {
+//       console.log(to.path);
+//       if (to.path == '/userList') {
+//          next({path: '/hourseList'});
+//          next(false);
+//       }
+//     }
+//     next()
+//   }
+// })
 
 
 new Vue({

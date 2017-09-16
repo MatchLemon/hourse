@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let base = '';
+let base = 'http://172.17.2.146:8080';
 
 export const requestLogin = params => {
     return axios.post(`${base}/api/login`, params).then(

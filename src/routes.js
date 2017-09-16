@@ -36,8 +36,21 @@ let adminRouters = [
 
 ];
 let routes = [
+        {
+        path: '/list',
+        component: resolve => require(['./views/front/homeList.vue'], resolve),
+        name: '',
+        hidden: true
+    },
+        {
+        path: '/detail',
+        component: resolve => require(['./views/front/detail.vue'], resolve),
+        name: '',
+        hidden: true
+    },
+
     {
-        path: '/login',
+        path: '/admin/login',
         component: resolve => require(['./views/Login.vue'], resolve),
         name: '',
         hidden: true
@@ -48,10 +61,30 @@ let routes = [
         name: '',
         hidden: true
     },
+
     {
-        path: '/',
+        path: '/admin/',
         component: resolve => require(['./views/Home.vue'], resolve),
-        name: '房产管理',
+        name: '租赁管理',
+        iconCls: 'fa fa-id-card-o',
+        children: [
+
+            {
+                path: '/hourseList',
+                component: resolve => require(['./views/hourse/hourseList.vue'], resolve),
+                name: '房产列表'
+            },
+            {
+                path: '/addHourse',
+                component: resolve => require(['./views/hourse/addHourse.vue'], resolve),
+                name: '添加房产'
+            },
+        ]
+    },
+       {
+        path: '/admin/',
+        component: resolve => require(['./views/Home.vue'], resolve),
+        name: '买卖管理',
         iconCls: 'fa fa-id-card-o',
         children: [
 
@@ -68,7 +101,7 @@ let routes = [
         ]
     },
     {
-        path: '/',
+        path: '/admin/',
         component: resolve => require(['./views/Home.vue'], resolve),
         name: 'Setting',
         iconCls: 'el-icon-setting',
