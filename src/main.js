@@ -24,7 +24,8 @@ router.beforeEach((to, from, next) => {
     sessionStorage.removeItem('user');
   }
   let user = JSON.parse(sessionStorage.getItem('user'));
-    if(to.path == "/" || to.path == "/detail") {
+  console.log(to.params)
+    if(to.path == "/" || to.params.houseId) {
         next();
     } else if (!user && to.path != '/admin/login') {
       next({ path: '/login' })

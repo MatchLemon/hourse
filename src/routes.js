@@ -43,7 +43,7 @@ let routes = [
         hidden: true
     },
         {
-        path: '/detail/:hourseId',
+        path: '/detail/:houseId',
         component: resolve => require(['./views/front/detail.vue'], resolve),
         name: '',
         hidden: true
