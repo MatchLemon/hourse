@@ -6,10 +6,10 @@
     <el-tab-pane label="二手房源" name="second"></el-tab-pane>
   </el-tabs>
     <listcomponent 
-      v-for="(item, index) in items"
+      v-for="(item, index) in houseList"
       v-bind:item="item"
       v-bind:index="index"
-      v-bind:message="item"
+      v-bind:houseInfo="item"
       v-bind:houseId=101
      ></listcomponent>
   <div class="block">
@@ -20,7 +20,7 @@
       :page-sizes="[10, 20, 30, 40]"
       :page-size="10"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="40" class="paginator">
+      :total=totalCount class="paginator">
     </el-pagination>
   </div>
 </el-row>
@@ -68,32 +68,98 @@
 
 <script>
  import listcomponent from '../../component/listcomponent.vue'
+   import { getFrontHouseList } from '../../api/api';
+
 export default {
    methods: {
       handleSizeChange(val) {
+        this.pageSize = val
+        this.get_data()
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
         this.currentPage = val
+        this.get_data()
         console.log(this.currentPage);
       },
       handleClick(tab, event) {
         this.houseType = tab.index
+        this.get_data()
         console.log(tab.index, event);
       },
-      get_data (params) {
-      if (!params) params = {}
-      this.$api.get('topics', params, r => {
-        this.lists = r.data
-      })
-    }
+      get_data () {
+       var params = { typeId: this.houseType, 
+                  pageNumber: this.currentPage - 1, 
+                   pageSize: this.pageSize };
+          getFrontHouseList(params).then(data1 => {
+                    console.log(data1);
+                    let { msg, code, data } = data1;
+                    if (code !== 200) {
+                      this.houseList = []
+                      this.$message({
+                        message: msg,
+                        type: 'error'
+                      });
+                    } else {
+                      this.houseList = data
+                    }
+                  });
+      }
     },
   data() {
     return {
-          items: ["src/assets/pic-pd-3.png","skjgh","adasd","萨德安分","年语法二维","的HIA月让饿哦儒雅我诶发"],
-          currentPage: 4,
+          houseList: [
+        {
+            "title": "123456",
+            "name": "哈哈",
+            "houseType": "三户型",
+            "houseOrientation": "chaonan",
+            "floor": "13",
+            "decorate": "精装",
+            "area": "118",
+            "addr": "中原区航海东路",
+            "phone": "13456780987",
+            "status": "1",
+            "isPublic": "1",
+            "desc": "急用钱",
+            "type": "1",
+            "id": "59be1c405257cb07f4997050",
+            "rentPrice": "1100",
+            "rentMethod": "整租",
+            "images": [
+                "www.baidu.com",
+                "www.google.com"
+            ]
+        },
+        {
+ 
+            "title": "123456",
+            "name": "哈哈",
+            "houseType": "三户型",
+            "houseOrientation": "chaonan",
+            "floor": "13",
+            "decorate": "精装",
+            "area": "118",
+            "addr": "中原区航海东路",
+            "phone": "13456780987",
+            "status": "1",
+            "isPublic": "1",
+            "desc": "急用钱",
+            "type": "1",
+            "id": "59be190b5257cb63a88cf856",
+            "rentPrice": "1100",
+            "rentMethod": "整租",
+            "images": [
+                "www.baidu.com",
+                "www.google.com"
+            ]
+        }
+    ],
+          currentPage: 1,
+          pageSize: 10,
           activeName: 'first',
-          houseType: 1
+          houseType: 1,
+          totalCount: 0
     };
   },
   components: {listcomponent},
