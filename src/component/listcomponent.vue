@@ -5,7 +5,7 @@
         <div class="clearfix">
                 <div class="pic">
                   <a href="javascript:;" target="_blank">
-                    <img src="src/assets/pic-pd-3.png" style="display: inline;">
+                    <img src="http://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg" style="display: inline;" width="147px" height="110px">
                   </a>
                 </div>
                 <div class="list-info">
@@ -63,10 +63,12 @@
 export default {
   data() {
     return {
+        imageUrl: this.houseInfo.images[0],
+        houseId: this.houseInfo.id
     }
 
   },
-  props: ['houseId','houseInfo'],
+  props: ['houseInfo'],
   methods: {
     detail: function (event) {
       this.$router.push({ path: '/detail/' + this.houseId });

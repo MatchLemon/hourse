@@ -396,7 +396,7 @@ export default {
    created () {
     // 组件创建完后获取数据，
     // 此时 data 已经被 observed 了
-    // this.get_data()
+    this.get_data()
     console.log(this.$route.params)
   },
 

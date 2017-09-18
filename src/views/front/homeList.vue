@@ -1,18 +1,18 @@
 
  <template>
 
-  <div class="list-body">
+  <!-- <div class="list-body"> -->
 
     <el-row>
-      <div class="list-title">
+      <div>
          <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="出租房源" name="first"></el-tab-pane>
           <el-tab-pane label="二手房源" name="second"></el-tab-pane>
         </el-tabs>
       </div>
-      <div class="list-content">
+     <!--  <div class="list-content">
 
-      </div>
+      </div> -->
       <listcomponent
         v-for="(item, index) in houseList"
         v-bind:item="item"
@@ -34,7 +34,7 @@
         </el-pagination>
       </div>
     </el-row>
-  </div>
+  <!-- </div> -->
 
 </template>
 <style>
@@ -136,7 +136,8 @@ export default {
                         type: 'error'
                       });
                     } else {
-                      this.houseList = data
+                         this.houseList = data.hourses;
+                        this.totalCount = data.totalCount;
                     }
                   });
       }
@@ -162,8 +163,8 @@ export default {
             "rentPrice": "1100",
             "rentMethod": "整租",
             "images": [
-                "www.baidu.com",
-                "www.google.com"
+                "https://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg",
+                "https://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg"
             ]
         },
         {
@@ -185,8 +186,8 @@ export default {
             "rentPrice": "1100",
             "rentMethod": "整租",
             "images": [
-                "www.baidu.com",
-                "www.google.com"
+                "http://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg",
+                "http://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg"
             ]
         }
     ],
