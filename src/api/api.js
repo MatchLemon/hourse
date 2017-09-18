@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let base = '';
+let base = 'http://www.dingshengfangchan.com';
 
 export const requestLogin = params => {
     return axios.post(`${base}/api/login`, params).then(
@@ -57,3 +57,18 @@ export const getDomain = () => {
     var url = `${base}/token/index.php?r=getDomain`;
     return axios.get(url);
 };
+
+export const getFrontHouseList = params => {
+    var url = `${base}/api/front/hourses/` + params.typeId
+     + '?pageNumber=' + params.pageNumber 
+     + '&pageSize=' + params.pageSize;
+    return axios.get(url);
+};
+
+export const getFrontHouseDetail = params => {
+    var url = `${base}/api/hourse/` + params.houseId
+    return axios.get(url);
+};
+
+
+

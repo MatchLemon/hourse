@@ -94,18 +94,17 @@ export default {
        var params = { typeId: this.houseType,
                   pageNumber: this.currentPage - 1,
                    pageSize: this.pageSize };
-          getFrontHouseList(params).then(data1 => {
-                    console.log(data1);
-                    let { msg, code, data } = data1;
-                    if (code !== 200) {
+          getFrontHouseList(params).then((res) => {
+                    console.log(res);
+                    if (res.status !== 200) {
                       this.houseList = []
                       this.$message({
-                        message: msg,
+                        message: res.msg,
                         type: 'error'
                       });
                     } else {
-                         this.houseList = data.hourses;
-                        this.totalCount = data.totalCount;
+                         this.houseList = res.data.data.hourses;
+                        this.totalCount = res.data.data.totalCount;
                     }
                   });
       }
@@ -113,51 +112,7 @@ export default {
   data() {
     return {
           houseList: [
-        {
-            "title": "123456",
-            "name": "哈哈",
-            "houseType": "三户型",
-            "houseOrientation": "chaonan",
-            "floor": "13",
-            "decorate": "精装",
-            "area": "118",
-            "addr": "中原区航海东路",
-            "phone": "13456780987",
-            "status": "1",
-            "isPublic": "1",
-            "desc": "急用钱",
-            "type": "1",
-            "id": "59be1c405257cb07f4997050",
-            "rentPrice": "1100",
-            "rentMethod": "整租",
-            "images": [
-                "https://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg",
-                "https://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg"
-            ]
-        },
-        {
-
-            "title": "123456",
-            "name": "哈哈",
-            "houseType": "三户型",
-            "houseOrientation": "chaonan",
-            "floor": "13",
-            "decorate": "精装",
-            "area": "118",
-            "addr": "中原区航海东路",
-            "phone": "13456780987",
-            "status": "1",
-            "isPublic": "1",
-            "desc": "急用钱",
-            "type": "1",
-            "id": "59be190b5257cb63a88cf856",
-            "rentPrice": "1100",
-            "rentMethod": "整租",
-            "images": [
-                "http://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg",
-                "http://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg"
-            ]
-        }
+        
     ],
           currentPage: 1,
           pageSize: 10,
@@ -170,7 +125,7 @@ export default {
    created () {
     // 组件创建完后获取数据，
     // 此时 data 已经被 observed 了
-    // this.get_data()
+    this.get_data()
   }
 }
 </script>

@@ -59,13 +59,13 @@
         <h3><em></em>概况</h3>
         <div class="general-item-wrap clearfix">
             <ul class="general-item-left">
-                <li>
-                  <span class="mr_25 c_999" v-if="houseDetail.totalPrice">房屋总价</span>
-                  <span class="c_000" v-if="houseDetail.totalPrice">{{houseDetail.totalPrice}} 万</span>
+                <li v-if="houseDetail.totalPrice">
+                  <span class="mr_25 c_999" >房屋总价</span>
+                  <span class="c_000" >{{houseDetail.totalPrice}} 万</span>
                 </li>
-                <li>
-                  <span class="mr_25 c_999" v-if="houseDetail.rentPrice">出租价格</span>
-                  <span class="c_000" v-if="houseDetail.rentPrice">{{houseDetail.rentPrice}} 万</span>
+                <li v-if="houseDetail.rentPrice">
+                  <span class="mr_25 c_999" >出租价格</span>
+                  <span class="c_000">{{houseDetail.rentPrice}} 万</span>
                 </li>
                 <li>
                   <span class="mr_25 c_999">房屋户型</span>
@@ -89,17 +89,17 @@
                   <span class="mr_25 c_999">装修情况</span>
                   <span class="c_000">{{houseDetail.decorate}}</span>
                 </li>
-                <li>
-                  <span class="mr_25 c_999" v-if="houseDetail.rentMethod">出租方式</span>
-                  <span class="c_000" v-if="houseDetail.rentMethod">{{houseDetail.rentMethod}}</span>
+                <li v-if="houseDetail.rentMethod">
+                  <span class="mr_25 c_999" >出租方式</span>
+                  <span class="c_000" >{{houseDetail.rentMethod}}</span>
                 </li>
-                <li>
-                  <span class="mr_25 c_999" v-if="houseDetail.equityYear">产权年限</span>
-                  <span class="c_000" v-if="houseDetail.equityYear">{{houseDetail.equityYear}}</span>
+                <li v-if="houseDetail.equityYear">
+                  <span class="mr_25 c_999" >产权年限</span>
+                  <span class="c_000" >{{houseDetail.equityYear}}</span>
                 </li>
-                <li>
-                  <span class="mr_25 c_999" v-if="houseDetail.buildYear">建筑年代</span>
-                  <span class="c_000" v-if="houseDetail.buildYear">{{houseDetail.buildYear}}</span>
+                <li v-if="houseDetail.buildYear">
+                  <span class="mr_25 c_999" >建筑年代</span>
+                  <span class="c_000">{{houseDetail.buildYear}}</span>
                 </li>
             </ul>
         </div>
@@ -164,7 +164,8 @@
   background-color: #d3dce6;
 }
 .main_imag {
-  width: 100%;
+  width: 490px;
+  height: 400px;
 }
 
 .house-basic-info {
@@ -355,16 +356,15 @@ export default {
    methods: {
       get_data () {
        var params = { houseId: this.$route.params.houseId };
-            getFrontHouseDetail(params).then(data1 => {
-                      console.log(data1);
-                      let { msg, code, data } = data1;
-                      if (code !== 200) {
+            getFrontHouseDetail(params).then((res) => {
+                      console.log(res);
+                      if (res.status !== 200) {
                         this.$message({
-                          message: msg,
+                          message: res.msg,
                           type: 'error'
                         });
                       } else {
-                        this.houseDetail = data
+                        this.houseDetail = res.data.data
                       }
                     });
         }
