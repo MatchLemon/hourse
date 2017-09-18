@@ -12,7 +12,7 @@
             <p class="house-basic-item1">
                 <span class="price" v-if="houseDetail.totalPrice">{{houseDetail.totalPrice}}<b>万</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="price" v-if="houseDetail.rentPrice">{{houseDetail.rentPrice}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="unit" v-if="houseDetail.refPrice">{{houseDetail.refPrice}} + "元/平"</span>
+                <span class="unit" v-if="houseDetail.refPrice">{{houseDetail.refPrice}}元/平</span>
             </p>
             <div class="house-basic-item2">
                 <p class="room">
@@ -21,7 +21,7 @@
                     <span class="sub">{{houseDetail.floor}}</span>
                 </p>
                 <p class="area">
-                    <span class="main">{{houseDetail.area}} + "平"</span>
+                    <span class="main">{{houseDetail.area}}平</span>
                     <span class="sub">{{houseDetail.decorate}}</span>
                 </p>
                 <p class="toward">
@@ -61,11 +61,11 @@
             <ul class="general-item-left">
                 <li>
                   <span class="mr_25 c_999" v-if="houseDetail.totalPrice">房屋总价</span>
-                  <span class="c_000" v-if="houseDetail.totalPrice">{{houseDetail.totalPrice}} + "万"</span>
+                  <span class="c_000" v-if="houseDetail.totalPrice">{{houseDetail.totalPrice}} 万</span>
                 </li>
                 <li>
                   <span class="mr_25 c_999" v-if="houseDetail.rentPrice">出租价格</span>
-                  <span class="c_000" v-if="houseDetail.rentPrice">{{houseDetail.rentPrice}} + "万"</span>
+                  <span class="c_000" v-if="houseDetail.rentPrice">{{houseDetail.rentPrice}} 万</span>
                 </li>
                 <li>
                   <span class="mr_25 c_999">房屋户型</span>

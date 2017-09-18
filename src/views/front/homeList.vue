@@ -1,37 +1,72 @@
 
  <template>
- <el-row>
-   <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="出租房源" name="first"></el-tab-pane>
-    <el-tab-pane label="二手房源" name="second"></el-tab-pane>
-  </el-tabs>
-    <listcomponent 
-      v-for="(item, index) in houseList"
-      v-bind:item="item"
-      v-bind:index="index"
-      v-bind:houseInfo="item"
-      v-bind:houseId=101
-     ></listcomponent>
-  <div class="block">
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-sizes="[10, 20, 30, 40]"
-      :page-size="10"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total=totalCount class="paginator">
-    </el-pagination>
+
+  <div class="list-body">
+
+    <el-row>
+      <div class="list-title">
+         <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="出租房源" name="first"></el-tab-pane>
+          <el-tab-pane label="二手房源" name="second"></el-tab-pane>
+        </el-tabs>
+      </div>
+      <div class="list-content">
+
+      </div>
+      <listcomponent
+        v-for="(item, index) in houseList"
+        v-bind:item="item"
+        v-bind:index="index"
+       v-bind:houseInfo="item"
+        class="list-item" >
+
+      </listcomponent>
+
+      <div class="block">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="[10, 20, 30, 40]"
+          :page-size=pageSize
+          layout="total, sizes, prev, pager, next, jumper"
+          :total=totalCount class="paginator">
+        </el-pagination>
+      </div>
+    </el-row>
   </div>
-</el-row>
 
 </template>
 <style>
+  .list-body {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .list-body .list-item {
+    background: #f1f1f1;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #d8d8d8;
+
+  }
+  .list-body .list-item:hover {
+    box-shadow: 3px 2px 10px #888888;
+  }
+  .list-title {
+    position: fixed;
+    background: #ffffff;
+    display: block;
+    width: 80%;
+    z-index: 1000;
+  }
+  .list-content {
+    margin-top: 57px;
+  }
   .time {
     font-size: 13px;
     color: #999;
   }
-  
+
   .bottom {
     margin-top: 13px;
     line-height: 12px;
@@ -60,7 +95,7 @@
       display: table;
       content: "";
   }
-  
+
   .clearfix:after {
       clear: both
   }
