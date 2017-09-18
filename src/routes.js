@@ -15,22 +15,22 @@ import NotFound from './views/404.vue'
 //import echarts from './views/charts/echarts.vue'
 let adminRouters = [
     {
-        path: '/admin/',
+        path: '/admin',
         component: resolve => require(['./views/Home.vue'], resolve),
         name: '用户管理',
         iconCls: 'el-icon-message',//图标样式class
         children: [
             {
-                path: '/main',
+                path: 'main',
                 component: resolve => require(['./views/Main.vue'], resolve),
                 name: '主页',
                 hidden: true
             },
             {
-                path: '/userList',
+                path: 'userList',
                 component: resolve => require(['./views/user/userList.vue'], resolve),
                 name: '用户列表'
-            },
+            }
         ]
     }
 
@@ -48,7 +48,6 @@ let routes = [
         name: '',
         hidden: true
     },
-
     {
         path: '/admin/login',
         component: resolve => require(['./views/Login.vue'], resolve),
@@ -61,24 +60,23 @@ let routes = [
         name: '',
         hidden: true
     },
-
     {
-        path: '/admin/',
+        path: '/admin',
         component: resolve => require(['./views/Home.vue'], resolve),
         name: '租赁管理',
         iconCls: 'fa fa-id-card-o',
         children: [
 
             {
-                path: '/admin/rentList',
+                path: 'rentList',
                 component: resolve => require(['./views/house/rentList.vue'], resolve),
                 name: '租赁列表'
             },
             {
-                path: '/admin/addRenthouse',
-                component: resolve => require(['./views/house/rentAddhouse.vue'], resolve),
+                path: 'addRenthouse',
+                component: resolve => require(['./views/house/rentAddHouse.vue'], resolve),
                 name: '添加房产'
-            },
+            }
         ]
     },
        {
@@ -95,9 +93,9 @@ let routes = [
             },
             {
                 path: '/admin/addhouse',
-                component: resolve => require(['./views/house/addhouse.vue'], resolve),
+                component: resolve => require(['./views/house/addHouse.vue'], resolve),
                 name: '添加房产'
-            },
+            }
         ]
     },
     {

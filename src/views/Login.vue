@@ -1,5 +1,5 @@
 <template>
-  <div :style='logbg'  @keyup="enter($event)">
+  <div :style='logbg' @keyup="enter($event)">
     <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
       <h3 class="title">房产后台登录</h3>
       <el-form-item prop="account">
@@ -81,16 +81,16 @@
                 });
               } else {
                 user['avatar'] = 'https://avatars0.githubusercontent.com/u/12583493?v=4&s=40';
+                sessionStorage.setItem('user', JSON.stringify(user));
                 if (user.type == 1 ) {
                   _this.$router.addRoutes(routes.adminRouters)
                   _this.$router.options.routes = routes.allRoutes
-                  this.$router.push({path: '/userList'});
+                  _this.$router.push({path:'/admin/userList'});
                 } else {
                     _this.$router.addRoutes(routes.commRouter)
                     _this.$router.options.routes = routes.commRouter
-                    this.$router.push({ path: '/houseList' });
+                    _this.$router.push({path: '/admin/houseList'});
                 }
-                sessionStorage.setItem('user', JSON.stringify(user));
               }
             });
           } else {

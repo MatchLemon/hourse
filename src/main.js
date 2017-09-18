@@ -20,21 +20,19 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   //NProgress.start();
-  if (to.path == '/login') {
+  if (to.path == '/admin/login') {
     sessionStorage.removeItem('user');
   }
   let user = JSON.parse(sessionStorage.getItem('user'));
-  console.log(to.params)
-    if(to.path == "/" || to.params.houseId) {
-        next();
-    } else if (!user && to.path != '/admin/login') {
-      next({ path: '/login' })
-    } else {
-        if (user && user.type != 1) {
-            console.log(to.path);
-        if (to.path == '/userList') {
-            next({path: '/houseList'});
-            next(false);
+  if(to.path == "/" || to.params.houseId) {
+    next();
+  } else if (!user && to.path != '/admin/login') {
+    next({ path: '/admin/login' })
+  } else {
+    if (user && user.type != 1) {
+      if (to.path == '/admin/userList') {
+          next({path: '/admin/houseList'});
+          next(false);
       }
     }
     next()
