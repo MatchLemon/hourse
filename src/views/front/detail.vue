@@ -3,53 +3,54 @@
   <div class="house-basic-info clearfix">
       <!-- 左边  轮播 -->
       <el-carousel :interval="5000" arrow="always">
-        <el-carousel-item v-for="item in 4" :key="item">
-          <img src="https://pic1.ajkimg.com/display/aifang/bf4a9ccb39e707ce3de7e0f53a514508/133x100c.jpg" class="main_imag" >
+        <el-carousel-item v-for="item in houseDetail.images" :key="item">
+          <img src=item class="main_imag" >
         </el-carousel-item>
       </el-carousel>
       <!-- 右边 价格 信息等 -->
       <div class="house-basic-right fr">
             <p class="house-basic-item1">
-                <span class="price">42<b>万</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="unit">8750 元/平</span>
+                <span class="price" v-if="houseDetail.totalPrice">{{houseDetail.totalPrice}}<b>万</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="price" v-if="houseDetail.rentPrice">{{houseDetail.rentPrice}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="unit" v-if="houseDetail.refPrice">{{houseDetail.refPrice}}元/平</span>
             </p>
             <div class="house-basic-item2">
                 <p class="room">
-                    <span class="main">1室1厅1卫</span>
-                    <span class="sub">中层/共21层</span>
+
+                    <span class="main">{{houseDetail.houseType}}</span>
+                    <span class="sub">{{houseDetail.floor}}</span>
                 </p>
                 <p class="area">
-                    <span class="main">48平</span>
-                    <span class="sub">精装修</span>
+                    <span class="main">{{houseDetail.area}}平</span>
+                    <span class="sub">{{houseDetail.decorate}}</span>
                 </p>
                 <p class="toward">
-                    <span class="main">南北</span>
-                    <span class="sub">2016年建</span>
+                    <span class="main">{{houseDetail.houseOrientation}}</span>
+                    <span class="sub" v-if="houseDetail.buildYear">{{houseDetail.buildYear}}</span>
                 </p>
             </div>
             <ul class="house-basic-item3">
-                <li>
+               <!--  <li>
                     <span class="c_999">小区：</span>
                     <span class="c_000 mr_10">
                         <a class="c_000">杭州湾世纪城(滨海大道)</a>-
                         <a class="c_000">其他</a>
                     </span>
-                </li>
+                </li> -->
                 <li>
                     <span class="c_999">位置：</span>
                     <span class="c_000 mr_10">
-                        <a class="c_000">上海周边</a>－
-                        <a class="c_000">滨海大道,近金源大道</a>
+                        <a class="c_000">{{houseDetail.addr}}</a>－
                     </span>
                 </li>
             </ul>
-            <div class="house-basic-item4">
+           <!--  <div class="house-basic-item4">
                 <p class="nav">
                     <span class="f14 c_333 jjrsay">我爱我家-曾灵强说</span>
                 </p>
                 <p class="c_999 lh22 jjr-desc">交通： 距离跨海大桥南岸高速口2公里、长途客运中心5分，钟、到高铁站25分，钟、到上海金山80公里、将近20路公交车、 开发区企业：方太、上海大众、吉利汽车、联合利华、美国库伯、美高梅、苹果、好孩子、雅戈尔、雅迪、妈咪宝、合生创展、中国移动信息产业园、德国博
                 </p>
-            </div>
+            </div> -->
       </div>
   </div>
 
@@ -59,38 +60,46 @@
         <div class="general-item-wrap clearfix">
             <ul class="general-item-left">
                 <li>
-                  <span class="mr_25 c_999">房屋总价</span>
-                  <span class="c_000">42万(单价 8750元/㎡)</span>
+                  <span class="mr_25 c_999" v-if="houseDetail.totalPrice">房屋总价</span>
+                  <span class="c_000" v-if="houseDetail.totalPrice">{{houseDetail.totalPrice}} 万</span>
+                </li>
+                <li>
+                  <span class="mr_25 c_999" v-if="houseDetail.rentPrice">出租价格</span>
+                  <span class="c_000" v-if="houseDetail.rentPrice">{{houseDetail.rentPrice}} 万</span>
                 </li>
                 <li>
                   <span class="mr_25 c_999">房屋户型</span>
-                  <span class="c_000">1室1厅1卫</span>
+                  <span class="c_000">{{houseDetail.houseType}}</span>
                 </li>
                 <li>
                   <span class="mr_25 c_999">房本面积</span>
-                  <span class="c_000">48㎡</span>
+                  <span class="c_000">{{houseDetail.area}}㎡</span>
                 </li>
                 <li>
                   <span class="mr_25 c_999">房屋朝向</span>
-                  <span class="c_000">南北</span>
+                  <span class="c_000">{{houseDetail.houseOrientation}}</span>
                 </li>
             </ul>
             <ul class="general-item-right">
                 <li>
                   <span class="mr_25 c_999">所在楼层</span>
-                  <span class="c_000">中层/共21层</span>
+                  <span class="c_000">{{houseDetail.floor}}</span>
                 </li>
                 <li>
                   <span class="mr_25 c_999">装修情况</span>
-                  <span class="c_000">精装修</span>
+                  <span class="c_000">{{houseDetail.decorate}}</span>
                 </li>
                 <li>
-                  <span class="mr_25 c_999">产权年限</span>
-                  <span class="c_000">70年</span>
+                  <span class="mr_25 c_999" v-if="houseDetail.rentMethod">出租方式</span>
+                  <span class="c_000" v-if="houseDetail.rentMethod">{{houseDetail.rentMethod}}</span>
                 </li>
                 <li>
-                  <span class="mr_25 c_999">建筑年代</span>
-                  <span class="c_000">2016年</span>
+                  <span class="mr_25 c_999" v-if="houseDetail.equityYear">产权年限</span>
+                  <span class="c_000" v-if="houseDetail.equityYear">{{houseDetail.equityYear}}</span>
+                </li>
+                <li>
+                  <span class="mr_25 c_999" v-if="houseDetail.buildYear">建筑年代</span>
+                  <span class="c_000" v-if="houseDetail.buildYear">{{houseDetail.buildYear}}</span>
                 </li>
             </ul>
         </div>
@@ -103,15 +112,7 @@
             <div class="genaral-pic-desc">
                 <p class="pic-desc-word">
                     <p class="pic-desc-word-content">
-                      <br> 距离跨海大桥南岸高速口2公里、长途客运中心5分，钟、到高铁站25分，钟、到上海金山80公里、将近20路公交车、
-                      <br> 开发区企业：方太、上海大众、吉利汽车、联合利华、美国库伯、美高梅、苹果、好孩子、雅戈尔、雅迪、妈咪宝、合生创展、中国移动信息产业园、德国博世、中信集团等
-                      <br> 88平月租金1800-2000
-                      <br> 商业配套：均已运营
-                      <br> 1、30万金源世纪购物中心、24万的风情商业街
-                      <br> 2、永辉超大超市、肯德基、必胜客、星巴克、沃美影城、苏宁易购等
-                      <br> 3、8万五星mdash;金源世纪和宁波杭州湾海底温泉娱乐会所，6万的世纪金源写字楼
-                      <br> 医疗教育一应俱全：
-                      <br> 8万平米三甲医院：宁波二院杭州湾医院、慈溪市第七人民医
+                      {{houseDetail.desc}}
                     </p>
                 </p>
             </div>
@@ -348,24 +349,54 @@ li, ol, ul {
 </style>
 
 <script>
+   import { getFrontHouseDetail } from '../../api/api';
+
 export default {
    methods: {
-      get_data (params) {
-      if (!params) params = {}
-      this.$api.get('/v3/products/11737', params, r => {
-        this.lists = r.data
-      })
-    }
+      get_data () {
+       var params = { houseId: this.$route.params.houseId };
+            getFrontHouseDetail(params).then(data1 => {
+                      console.log(data1);
+                      let { msg, code, data } = data1;
+                      if (code !== 200) {
+                        this.$message({
+                          message: msg,
+                          type: 'error'
+                        });
+                      } else {
+                        this.houseDetail = data
+                      }
+                    });
+        }
     },
   data() {
     return {
-
+          houseDetail: {
+                    title:'',
+                    name: '',
+                    totalPrice:'',
+                    refPrice:'',
+                    area: '',
+                    tradingRight:'',
+                    houseType:'',
+                    houseOrientation:'',
+                    floor:'',
+                    decorate:'',
+                    equityYear:'',
+                    buildYear:'',
+                    addr: '',
+                    phone: '',
+                    desc: '',
+                    images: [],
+                    rentPrice: '',
+                    rentMethod: '',
+                }
     };
   },
    created () {
     // 组件创建完后获取数据，
     // 此时 data 已经被 observed 了
-    // this.get_data()
+    this.get_data()
     console.log(this.$route.params)
   },
 

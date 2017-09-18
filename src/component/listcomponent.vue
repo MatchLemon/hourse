@@ -5,29 +5,28 @@
         <div class="clearfix">
                 <div class="pic">
                   <a href="javascript:;" target="_blank">
-                    <img src="https://pic1.ajkimg.com/display/aifang/bf4a9ccb39e707ce3de7e0f53a514508/133x100c.jpg" style="display: inline;">
+                    <img src="http://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg" style="display: inline;" width="147px" height="110px">
                   </a>
                 </div>
                 <div class="list-info">
                     <h2 class="title">
-                        <a href="javascript:;" onclick="" target="_blank">22号线旁二房出售 高性价比 周围配套齐全 适合 </a>
+                        <a href="javascript:;" onclick="" target="_blank">{{houseInfo.title}} </a>
                     </h2>
                     <p class="baseinfo">
-                        <span>2室1厅1卫</span>
-                        <span>57.0㎡&nbsp;</span>
-                        <span>南</span>
-                        <span>低层(共6层)</span>
+                        <span>{{houseInfo.houseType}}</span>
+                        <span>{{houseInfo.area}}㎡&nbsp;</span>
+                        <span>{{houseInfo.houseOrientation}}</span>
+                        <span>{{houseInfo.floor}}</span>
+                        <span>{{houseInfo.decorate}}</span>
                     </p>
                     <p class="baseinfo">
                         <span>
-                            <a href="javascript:;" target="_blank">临潮二村</a>－
-                            <a href="javascript:;" target="_blank">金山</a>－
-                            <a>隆安路99号</a>
+                            <a href="javascript:;" target="_blank">{{houseInfo.addr}}</a>
                         </span>
                     </p>
                     <div class="jjrinfo">
-                        煦柘房地产－
-                        <a href="javascript:;" class="listjjr">
+                        鼎盛房地产
+                        <!-- <a href="javascript:;" class="listjjr">
                             <span class="jjrname-outer">宛梅</span>
                             <div class="jjrtip" style="display: none;">
                                 <img src="http://img.58cdn.com.cn/ui9/house/list/list_jjr.png" alt="经纪人图像" class="logo" />
@@ -44,13 +43,16 @@
                                     </p>
                                     <span class="tipArrow"></span>
                             </div>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
                 <div class="price">
-                    <p class="sum">
-                        <b>88</b>万</p>
-                    <p class="unit">15438元/㎡</p>
+                    <p class="sum" v-if="houseInfo.rentPrice">
+                        <b>{{houseInfo.rentPrice}}</b></p>
+                    <p class="sum" v-if="houseInfo.totalPrice">
+                        <b>{{houseInfo.totalPrice}}</b>万</p>
+                    <p class="unit" v-if="houseInfo.refPrice">{{houseInfo.refPrice}} + "/㎡"</p>
+                    <p class="unit" v-if="houseInfo.rentMethod">{{houseInfo.rentMethod}}</p>
                 </div>
             </div>
       </div>
@@ -61,11 +63,12 @@
 export default {
   data() {
     return {
-
+        imageUrl: this.houseInfo.images[0],
+        houseId: this.houseInfo.id
     }
 
   },
-  props: ['houseId','message'],
+  props: ['houseInfo'],
   methods: {
     detail: function (event) {
       this.$router.push({ path: '/detail/' + this.houseId });
