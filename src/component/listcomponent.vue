@@ -5,7 +5,7 @@
         <div class="clearfix">
                 <div class="pic">
                   <a href="javascript:;" target="_blank">
-                    <img src="http://img.wowdsgn.com/page/banners/1a18d4d1-f599-4d00-8d2d-c7c0e33b6d72_2dimension_1248x828.jpg" style="display: inline;" width="147px" height="110px">
+                    <img src=imageUrl style="display: inline;" width="147px" height="110px">
                   </a>
                 </div>
                 <div class="list-info">
