@@ -32,11 +32,12 @@ export const addUser = params => {
 
 export const deletehouse = params => {
     var url = `${base}/api/delete/` + params.houseId
-    return axios.delete(url, {});
+    return axios.delete(url, params);
 };
 
 export const savehouse = params => {
-    return axios.post(`${base}/api/hourse/create`, params);
+    var url = `${base}/api/hourse/create?type=` + params.type;
+    return axios.post(url, params);
 };
 
 export const edithouse = params => {
@@ -60,7 +61,7 @@ export const getDomain = () => {
 
 export const getFrontHouseList = params => {
     var url = `${base}/api/front/hourses/` + params.typeId
-     + '?pageNumber=' + params.pageNumber 
+     + '?pageNumber=' + params.pageNumber
      + '&pageSize=' + params.pageSize;
     return axios.get(url);
 };
