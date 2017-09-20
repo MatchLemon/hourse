@@ -258,7 +258,8 @@
                     pageNumber: this.page - 1,
                     name: this.filters.name,
                     pageSize:20,
-                    userId: user.id
+                    userId: user.id,
+                    type: 0
                 };
                 this.listLoading = true;
                 //NProgress.start();
