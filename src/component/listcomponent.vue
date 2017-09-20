@@ -5,7 +5,7 @@
         <div class="clearfix">
                 <div class="pic">
                   <a href="javascript:;" target="_blank">
-                    <img src=imageUrl style="display: inline;" width="147px" height="110px">
+                    <img src=houseInfo.images[0] style="display: inline;" width="147px" height="110px">
                   </a>
                 </div>
                 <div class="list-info">
@@ -63,15 +63,13 @@
 export default {
   data() {
     return {
-        imageUrl: this.houseInfo.images[0],
-        houseId: this.houseInfo.id
     }
 
   },
   props: ['houseInfo'],
   methods: {
     detail: function (event) {
-      this.$router.push({ path: '/detail/' + this.houseId });
+      window.open({ path: 'www.dingshengfangchan/detail/' + this.houseInfo.id });
     }
   }
 }

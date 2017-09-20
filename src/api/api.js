@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let base = '';
+let base = 'http://www.dingshengfangchan.com';
 
 export const requestLogin = params => {
     return axios.post(`${base}/api/login`, params).then(

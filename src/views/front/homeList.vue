@@ -12,6 +12,7 @@
         v-bind:item="item"
         v-bind:index="index"
        v-bind:houseInfo="item"
+       v-bind:houseId="item.id"
         class="list-item" >
 
       </listcomponent>
@@ -103,6 +104,7 @@ export default {
                         type: 'error'
                       });
                     } else {
+                      this.houseList = []
                          this.houseList = res.data.data.hourses;
                         this.totalCount = res.data.data.totalCount;
                     }
