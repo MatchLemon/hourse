@@ -51,7 +51,7 @@
                         <b>{{houseInfo.rentPrice}}</b></p>
                     <p class="sum" v-if="houseInfo.totalPrice">
                         <b>{{houseInfo.totalPrice}}</b>万</p>
-                    <p class="unit" v-if="houseInfo.refPrice">{{houseInfo.refPrice}} + "/㎡"</p>
+                    <p class="unit" v-if="houseInfo.refPrice">{{houseInfo.refPrice}} /㎡</p>
                     <p class="unit" v-if="houseInfo.rentMethod">{{houseInfo.rentMethod}}</p>
                 </div>
             </div>

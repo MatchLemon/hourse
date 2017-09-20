@@ -12,7 +12,7 @@
             <p class="house-basic-item1">
                 <span class="price" v-if="houseDetail.totalPrice">{{houseDetail.totalPrice}}<b>万</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="price" v-if="houseDetail.rentPrice">{{houseDetail.rentPrice}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="unit" v-if="houseDetail.refPrice">{{houseDetail.refPrice}}元/平</span>
+                <span class="unit" v-if="houseDetail.refPrice">{{houseDetail.refPrice}} 元/平</span>
             </p>
             <div class="house-basic-item2">
                 <p class="room">
