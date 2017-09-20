@@ -11,9 +11,10 @@
         v-for="(item, index) in houseList"
         v-bind:item="item"
         v-bind:index="index"
-       v-bind:houseInfo="item"
-       v-bind:houseId="item.id"
-        class="list-item" >
+        v-bind:houseInfo="item"
+        v-bind:houseId="item.id"
+        class="list-item"
+        :key= "item.id">
 
       </listcomponent>
 
@@ -114,7 +115,7 @@ export default {
   data() {
     return {
           houseList: [
-        
+
     ],
           currentPage: 1,
           pageSize: 10,
