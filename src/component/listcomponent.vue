@@ -69,7 +69,8 @@ export default {
   props: ['houseInfo'],
   methods: {
     detail: function (event) {
-      window.open({ path: 'www.dingshengfangchan/detail/' + this.houseInfo.id });
+    window.open(window.location.origin + '/detail/' + this.houseInfo.id);
+      //window.open({ path: 'www.dingshengfangchan/detail/' + this.houseInfo.id });
     }
   }
 }

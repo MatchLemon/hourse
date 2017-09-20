@@ -178,7 +178,7 @@ import constants from '../../common/js/constants'
                             this.hProperty.type = 0;
                             savehouse(Object.assign({}, this.hProperty)).then((res) => {
                                 if (res.data.status == 200 ) {
-                                    this.$router.push({ path: '/houseList' });
+                                    this.$router.push({ path: '/admin/rentList' });
                                     this.$message({
                                          message: '添加成功',
                                          type: 'success'
