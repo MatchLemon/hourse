@@ -249,7 +249,12 @@
                     token: constants.qiniuToken
                 },
                 images:[],
-                imagesList:[]
+                imagesList:[],
+                computed: {
+                    getUser:function() {
+                        return JSON.parse(sessionStorage.getItem('user'));
+                    }
+                }
 
             }
         },
@@ -299,7 +304,7 @@
                 }).then(() => {
                     this.listLoading = true;
                     //NProgress.start();
-                    let para = {houseId: row.id};
+                    let para = {houseId: row.id, id: this.getUser.id};
                     deletehouse(para).then((res) => {
                         this.listLoading = false;
                         if(res.data.status == 200) {

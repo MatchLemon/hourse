@@ -202,31 +202,18 @@ import constants from '../../common/js/constants'
             onSubmit() {
                 this.$refs.hProperty.validate((valid) => {
                     if (valid) {
-                        let user = JSON.parse(sessionStorage.getItem('user'))
-                            // var house = {
-                            //     houseOwnerName : this.hProperty.name,
-                            //     title : this.hProperty.title,
-                            //     //images : this.hProperty.pic,
-                            //     images : this.images,
-                            //     price : this.hProperty.unitPrice,
-                            //     acreage : this.hProperty.area,
-                            //     address : this.hProperty.addr,
-                            //     houseOwnerPhone : this.hProperty.phone,
-                            //     status : this.hProperty.status,
-                            //     infomation : this.hProperty.desc,
-                            //     state : this.hProperty.sellWay,
-                            //     userId : user.id
-                            // }
-                            savehouse(Object.assign([], this.hProperty)).then((res) => {
-                                if (res.data.status == 200 ) {
-                                    this.$router.push({ path: '/houseList' });
-                                    this.$message({
-                                         message: '添加成功',
-                                         type: 'success'
-                                    });
-                                }
-                                    //NProgress.done();
-                            });
+                        let user = JSON.parse(sessionStorage.getItem('user'));
+                        this.hProperty.type = 1;
+                        savehouse(Object.assign({}, this.hProperty)).then((res) => {
+                            if (res.data.status == 200 ) {
+                                this.$router.push({ path: '/admin/houseList' });
+                                this.$message({
+                                     message: '添加成功',
+                                     type: 'success'
+                                });
+                            }
+                                //NProgress.done();
+                        });
                     }
                 });
             },
