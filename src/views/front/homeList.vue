@@ -117,7 +117,7 @@ export default {
           currentPage: 1,
           pageSize: 10,
           activeName: 'first',
-          houseType: 1,
+          houseType: 0,
           totalCount: 0
     };
   },
