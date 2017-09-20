@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let base = 'http://www.dingshengfangchan.com';
+let base = '';
 
 export const requestLogin = params => {
     return axios.post(`${base}/api/login`, params).then(
@@ -45,7 +45,7 @@ export const edithouse = params => {
 };
 
 export const gethouseListPage = params => {
-    var url = `${base}/api/hourses/` +  params.userId;
+    var url = `${base}/api/hourses/` +  params.userId + "?type=" + params.type;
     delete params['userId'];
     return axios.post(url, params);
 };
