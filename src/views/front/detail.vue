@@ -1,5 +1,5 @@
 <template>
-  <div class="con">
+  <div class="con" v-loading="listLoading">
   <div class="house-basic-info clearfix">
       <!-- 左边  轮播 -->
       <el-carousel :interval="5000" arrow="always">
@@ -356,8 +356,12 @@ export default {
    methods: {
       get_data () {
        var params = { houseId: this.$route.params.houseId };
+                this.listLoading = true;
+
             getFrontHouseDetail(params).then((res) => {
                       console.log(res);
+                      this.listLoading = false;
+
                       if (res.status !== 200) {
                         this.$message({
                           message: res.msg,
@@ -390,7 +394,8 @@ export default {
                     images: [],
                     rentPrice: '',
                     rentMethod: '',
-                }
+                },
+          listLoading: false
     };
   },
    created () {

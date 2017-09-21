@@ -2,22 +2,21 @@
  <template>
     <el-row>
       <div>
-         <el-tabs v-model="activeName" @tab-click="handleClick">
+         <el-tabs v-model="activeName" @tab-click="handleClick" >
           <el-tab-pane label="出租房源" name="first"></el-tab-pane>
           <el-tab-pane label="二手房源" name="second"></el-tab-pane>
         </el-tabs>
       </div>
+      <div v-loading="listLoading">
       <listcomponent
         v-for="(item, index) in houseList"
         v-bind:item="item"
         v-bind:index="index"
-        v-bind:houseInfo="item"
-        v-bind:houseId="item.id"
-        class="list-item"
-        :key= "item.id">
+       v-bind:houseInfo="item"
+        class="list-item" >
 
       </listcomponent>
-
+</div>
       <div class="block">
         <el-pagination
           @size-change="handleSizeChange"
@@ -96,8 +95,12 @@ export default {
        var params = { typeId: this.houseType,
                   pageNumber: this.currentPage - 1,
                    pageSize: this.pageSize };
+         this.listLoading = true;
+
           getFrontHouseList(params).then((res) => {
                     console.log(res);
+                    this.listLoading = false;
+
                     if (res.status !== 200) {
                       this.houseList = []
                       this.$message({
@@ -115,13 +118,14 @@ export default {
   data() {
     return {
           houseList: [
-
+        
     ],
           currentPage: 1,
           pageSize: 10,
           activeName: 'first',
           houseType: 0,
-          totalCount: 0
+          totalCount: 0,
+          listLoading: false
     };
   },
   components: {listcomponent},
