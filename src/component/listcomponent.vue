@@ -5,7 +5,7 @@
         <div class="clearfix">
                 <div class="pic">
                   <a href="javascript:;" target="_blank">
-                    <img src=houseInfo.images[0] style="display: inline;" width="147px" height="110px">
+                    <img v-bind:src=houseInfo.images[0] style="display: inline;" width="147px" height="110px">
                   </a>
                 </div>
                 <div class="list-info">

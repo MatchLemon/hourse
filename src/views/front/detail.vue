@@ -4,7 +4,7 @@
       <!-- 左边  轮播 -->
       <el-carousel :interval="5000" arrow="always">
         <el-carousel-item v-for="item in houseDetail.images" :key="item">
-          <img src=item class="main_imag" >
+          <img v-bind:src=item class="main_imag" >
         </el-carousel-item>
       </el-carousel>
       <!-- 右边 价格 信息等 -->
