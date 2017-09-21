@@ -45,7 +45,7 @@ export const edithouse = params => {
 };
 
 export const gethouseListPage = params => {
-    var url = `${base}/api/hourses/` +  params.userId + "?type=" + params.type;
+    var url = `${base}/api/`+ params.userId  +`/hourses/` + params.type;
     delete params['userId'];
     return axios.post(url, params);
 };
