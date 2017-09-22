@@ -14,7 +14,7 @@ export const requestLogin = params => {
 export const getUserList = params => { return axios.get(`${base}/user/list`, { params: params }); };
 
 export const getUserListPage = params => {
-    return axios.get(`${base}/api/account`, { params: params });
+    return axios.post(`${base}/api/accounts`, { params: params });
 };
 
 export const removeUser = params => {
