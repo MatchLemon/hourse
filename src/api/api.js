@@ -44,10 +44,15 @@ export const edithouse = params => {
     return axios.put(`${base}/api/update`, params);
 };
 
+// export const gethouseListPage = params => {
+//     var url = `${base}/api/`+ params.userId  +`/hourses/` + params.type;
+//     delete params['userId'];
+//     return axios.post(url, params);
+// };
+
 export const gethouseListPage = params => {
-    var url = `${base}/api/`+ params.userId  +`/hourses/` + params.type;
-    delete params['userId'];
-    return axios.post(url, params);
+    var url = `${base}/v1/api/houses/list`;
+    return axios.get(url, { params: params });
 };
 export const getQiniuToken = () => {
     var url = `${base}/token/index.php?r=getToken`;

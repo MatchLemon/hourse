@@ -20,13 +20,13 @@
             </el-table-column>
             <el-table-column prop="title" label="标题" width="120">
             </el-table-column>
-            <el-table-column prop="acreage" label="房屋面积" width="100">
+            <el-table-column prop="area" label="房屋面积" width="100">
             </el-table-column>
-            <el-table-column prop="houseOwnerPhone" label="联系电话" width="150">
+            <el-table-column prop="phone" label="联系电话" width="150">
             </el-table-column>
             <el-table-column prop="status" label="交易状态" width="130" :formatter="formatStatus" sortable>
             </el-table-column>
-            <el-table-column prop="address" label="地址" min-width="150" >
+            <el-table-column prop="addr" label="地址" min-width="150" >
 
             </el-table-column>
             <el-table-column label="操作" width="150">
@@ -282,17 +282,24 @@
             //获取house
             gethouse() {
                 let user = JSON.parse(sessionStorage.getItem('user'))
+                // let para = {
+                //     pageNumber: this.page - 1,
+                //     name: this.filters.name,
+                //     pageSize:20,
+                //     userId: user.id,
+                //     type: 1
+                // };
                 let para = {
-                    pageNumber: this.page - 1,
+                    page: this.page,
                     name: this.filters.name,
-                    pageSize:20,
+                    'per-page':20,
                     userId: user.id,
                     type: 1
                 };
                 this.listLoading = true;
                 //NProgress.start();
                 gethouseListPage(para).then((res) => {
-                    this.total = res.data.totalCount;
+                    this.total = res.data._meta.totalCount;
                     this.house = res.data.data;
                     this.listLoading = false;
                     //NProgress.done();
