@@ -95,8 +95,8 @@
 
                 <el-form-item label="是否公开">
                     <el-radio-group v-model="hProperty.isPublic">
-                        <el-radio :label="1" >是</el-radio>
-                        <el-radio :label="0" >否</el-radio>
+                        <el-radio label="1" >是</el-radio>
+                        <el-radio label="0" >否</el-radio>
                     </el-radio-group>
                 </el-form-item>
 
@@ -109,7 +109,8 @@
                           :on-preview="handlePictureCardPreview"
                           :on-remove="handleRemove"
                           :on-success="uploadSuccess"
-                          :data="postData">
+                          :data="postData"
+                          :file-list="imagesList">
                           <i class="el-icon-plus"></i>
                     </el-upload>
                     </div>
@@ -275,8 +276,10 @@
                     type: 'warning'
                 }).then(() => {
                     this.listLoading = true;
+                    let user = JSON.parse(sessionStorage.getItem('user'));
                     //NProgress.start();
-                    let para = {houseId: row.id, id: this.getUser.id};
+                    //let para = {houseId: row.id, id: this.getUser.id};
+                    let para = {houseId: row._id, id: user.id};
                     deletehouse(para).then((res) => {
                         this.listLoading = false;
                         if(res.data.status == 200) {

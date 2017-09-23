@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let base = 'http://www.dingshengfangchan.com';
+let base = '';
 
 export const requestLogin = params => {
     return axios.post(`${base}/api/login`, params).then(
@@ -41,7 +41,7 @@ export const savehouse = params => {
 };
 
 export const edithouse = params => {
-    return axios.put(`${base}/api/update`, params);
+    return axios.post(`${base}/v1/api/houses/update`, params);
 };
 
 // export const gethouseListPage = params => {
