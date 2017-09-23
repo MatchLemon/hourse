@@ -44,13 +44,13 @@
                     </span>
                 </li>
             </ul>
-           <!--  <div class="house-basic-item4">
-                <p class="nav">
-                    <span class="f14 c_333 jjrsay">我爱我家-曾灵强说</span>
+            <div class="house-basic-item4">
+                <p class="nav" v-if="houseDetail.name">
+                    <span class="f14 c_333 jjrsay">联系人：{{houseDetail.name}}</span>
                 </p>
-                <p class="c_999 lh22 jjr-desc">交通： 距离跨海大桥南岸高速口2公里、长途客运中心5分，钟、到高铁站25分，钟、到上海金山80公里、将近20路公交车、 开发区企业：方太、上海大众、吉利汽车、联合利华、美国库伯、美高梅、苹果、好孩子、雅戈尔、雅迪、妈咪宝、合生创展、中国移动信息产业园、德国博
+                <p class="c_999 lh22 jjr-desc" v-if="houseDetail.salesManPhone" >看房热线：{{houseDetail.salesManPhone}}
                 </p>
-            </div> -->
+            </div>
       </div>
   </div>
 
