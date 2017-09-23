@@ -183,6 +183,7 @@ import constants from '../../common/js/constants'
                     if (valid) {
                         let user = JSON.parse(sessionStorage.getItem('user'))
                             this.hProperty.type = 0;
+                            this.hProperty.createBy = user.id;
                             this.hProperty.images = this.images;
                             savehouse(Object.assign({}, this.hProperty)).then((res) => {
                                 if (res.data.status == 200 ) {
