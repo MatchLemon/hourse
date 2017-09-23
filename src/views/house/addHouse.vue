@@ -47,8 +47,11 @@
             <el-input v-model="hProperty.addr"></el-input>
         </el-form-item>
 
-        <el-form-item label="联系电话" prop="phone">
-            <el-input v-model="hProperty.phone"></el-input>
+        <el-form-item label="房东电话" prop="hostPhone">
+            <el-input v-model="hProperty.hostPhone"></el-input>
+        </el-form-item>
+        <el-form-item label="业务员电话" prop="salesManPhone">
+            <el-input v-model="hProperty.salesManPhone"></el-input>
         </el-form-item>
 
         <el-form-item label="交易状态">
@@ -124,7 +127,8 @@ import constants from '../../common/js/constants'
                     equityYear:'',
                     buildYear:'',
                     addr: '',
-                    phone: '',
+                    hostPhone: '',
+                    salesManPhone: '',
                     status: '',
                     desc: '',
                     isPublic: 1
@@ -180,6 +184,12 @@ import constants from '../../common/js/constants'
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
                     phone: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    hostPhone: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    salesManPhone: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ]
                 },
