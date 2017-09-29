@@ -24,6 +24,12 @@ var webpackConfig = merge(baseWebpackConfig, {
     filename: utils.assetsPath('js/[name].js'),//.[chunkhash]
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
+  externals: {
+    vue: 'Vue',
+    vuex: 'Vuex',
+    "vue-router":'VueRouter',
+    "element-ui":'ELEMENT'
+  },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
@@ -88,6 +94,26 @@ var webpackConfig = merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
+        ignore: ['.*']
+      },
+      {
+        from: path.resolve(__dirname, '../node_modules/vue'),
+        to: config.build.assetsSubDirectory + "/vendor/vue",
+        ignore: ['.*']
+      },
+      {
+        from: path.resolve(__dirname, '../node_modules/vuex'),
+        to: config.build.assetsSubDirectory + "/vendor/vuex",
+        ignore: ['.*']
+      },
+      {
+        from: path.resolve(__dirname, '../node_modules/element-ui'),
+        to: config.build.assetsSubDirectory + "/vendor/element-ui",
+        ignore: ['.*']
+      },
+      {
+        from: path.resolve(__dirname, '../node_modules/vue-router'),
+        to: config.build.assetsSubDirectory + "/vendor/vue-router",
         ignore: ['.*']
       }
     ])
