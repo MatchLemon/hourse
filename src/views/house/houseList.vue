@@ -18,15 +18,15 @@
             </el-table-column>
             <el-table-column type="index" width="60">
             </el-table-column>
-            <el-table-column prop="title" label="标题" width="120">
+            <el-table-column prop="title" label="标题" width="120" show-overflow-tooltip=true>
             </el-table-column>
-            <el-table-column prop="area" label="房屋面积" width="100">
+            <el-table-column prop="area" label="房屋面积" width="100" show-overflow-tooltip=true>
             </el-table-column>
             <el-table-column prop="salesManPhone" label="联系电话" width="150">
             </el-table-column>
             <el-table-column prop="status" label="交易状态" width="130" :formatter="formatStatus" sortable>
             </el-table-column>
-            <el-table-column prop="addr" label="地址" min-width="150" >
+            <el-table-column prop="addr" label="地址" min-width="150" show-overflow-tooltip=true>
 
             </el-table-column>
             <el-table-column label="操作" width="150">
