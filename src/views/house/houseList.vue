@@ -22,7 +22,7 @@
             </el-table-column>
             <el-table-column prop="area" label="房屋面积" width="100">
             </el-table-column>
-            <el-table-column prop="phone" label="联系电话" width="150">
+            <el-table-column prop="salesManPhone" label="联系电话" width="150">
             </el-table-column>
             <el-table-column prop="status" label="交易状态" width="130" :formatter="formatStatus" sortable>
             </el-table-column>
@@ -94,8 +94,11 @@
                         <el-input v-model="hProperty.addr"></el-input>
                     </el-form-item>
 
-                    <el-form-item label="联系电话" prop="phone">
-                        <el-input v-model="hProperty.phone"></el-input>
+                    <el-form-item label="房东电话" prop="phone">
+                        <el-input v-model="hProperty.hostPhone"></el-input>
+                    </el-form-item>
+                    <el-form-item label="业务员电话" prop="phone">
+                        <el-input v-model="hProperty.salesManPhone"></el-input>
                     </el-form-item>
 
                     <el-form-item label="交易状态">
@@ -109,8 +112,8 @@
 
                     <el-form-item label="是否公开">
                         <el-radio-group v-model="hProperty.isPublic">
-                            <el-radio :label="1" >是</el-radio>
-                            <el-radio :label="0" >否</el-radio>
+                            <el-radio label="1" >是</el-radio>
+                            <el-radio label="0" >否</el-radio>
                         </el-radio-group>
                     </el-form-item>
 
@@ -123,7 +126,8 @@
                               :on-preview="handlePictureCardPreview"
                               :on-remove="handleRemove"
                               :on-success="uploadSuccess"
-                              :data="postData">
+                              :data="postData"
+                              :file-list="imagesList">
                               <i class="el-icon-plus"></i>
                         </el-upload>
                         </div>
@@ -211,7 +215,10 @@
                     addr: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ],
-                    phone: [
+                    hostPhone: [
+                        { required: true, message: '请输此字段', trigger: 'blur' }
+                    ],
+                    salesManPhone: [
                         { required: true, message: '请输此字段', trigger: 'blur' }
                     ]
                 },
@@ -230,10 +237,11 @@
                     equityYear:'',
                     buildYear:'',
                     addr: '',
-                    phone: '',
+                    hostPhone: '',
+                    salesManPhone: '',
                     status: '',
                     desc: '',
-                    isPublic: 1
+                    isPublic: "1"
                 },
                 dialogImageUrl: '',
                 dialogVisible: false,
@@ -251,7 +259,7 @@
                 images:[],
                 imagesList:[],
                 computed: {
-                    getUser:function() {
+                    getUser : function() {
                         return JSON.parse(sessionStorage.getItem('user'));
                     }
                 }
@@ -281,7 +289,7 @@
             },
             //获取house
             gethouse() {
-                let user = JSON.parse(sessionStorage.getItem('user'))
+                let user = JSON.parse(sessionStorage.getItem('user'));
                 // let para = {
                 //     pageNumber: this.page - 1,
                 //     name: this.filters.name,
@@ -311,8 +319,9 @@
                     type: 'warning'
                 }).then(() => {
                     this.listLoading = true;
-                    //NProgress.start();
-                    let para = {houseId: row.id, id: this.getUser.id};
+                    let user = JSON.parse(sessionStorage.getItem('user'))
+                    //let para = {houseId: row.id, id: this.getUser.id};
+                    let para = {houseId: row._id, id: user.id};
                     deletehouse(para).then((res) => {
                         this.listLoading = false;
                         if(res.data.status == 200) {
