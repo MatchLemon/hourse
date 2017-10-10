@@ -131,9 +131,6 @@
                               <i class="el-icon-plus"></i>
                         </el-upload>
                         </div>
-                        <el-dialog v-model="dialogVisible" size="tiny">
-                            <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
                     </div>
 
                     </el-form-item>
@@ -146,6 +143,9 @@
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer"></div>
+        </el-dialog>
+        <el-dialog v-model="dialogVisible" size="small">
+            <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
         </section>
 </template>
