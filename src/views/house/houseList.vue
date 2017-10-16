@@ -269,17 +269,19 @@
         methods: {
             formatStatus: function (row, column) {
                 var result = "未知";
-                if (row.status == 0) {
-                    return "已打电话"
-                }
-                if (row.status == 1) {
-                    result = "交易中";
-                }
-                if (row.status == 2) {
-                    result = "已付款";
-                }
-                if (row.status == 3) {
-                    result = "已完成";
+                if(row.status!="") {
+                    if (row.status == 0) {
+                        return "已打电话"
+                    }
+                    if (row.status == 1) {
+                        result = "交易中";
+                    }
+                    if (row.status == 2) {
+                        result = "已付款";
+                    }
+                    if (row.status == 3) {
+                        result = "已完成";
+                    }
                 }
                 return result;
             },

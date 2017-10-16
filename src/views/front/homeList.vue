@@ -12,7 +12,8 @@
         v-for="(item, index) in houseList"
         v-bind:item="item"
         v-bind:index="index"
-       v-bind:houseInfo="item"
+        v-bind:houseInfo="item"
+        :key="idnex"
         class="list-item" >
 
       </listcomponent>
@@ -118,7 +119,7 @@ export default {
   data() {
     return {
           houseList: [
-        
+
     ],
           currentPage: 1,
           pageSize: 10,

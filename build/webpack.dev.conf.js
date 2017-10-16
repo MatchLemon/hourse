@@ -18,9 +18,9 @@ module.exports = merge(baseWebpackConfig, {
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
   externals: {
-    vue: 'Vue',
-    vuex: 'Vuex',
-    "vue-router":'VueRouter',
+    // vue: 'Vue',
+    // vuex: 'Vuex',
+    // "vue-router":'VueRouter',
     "element-ui":'ELEMENT'
   },
   plugins: [

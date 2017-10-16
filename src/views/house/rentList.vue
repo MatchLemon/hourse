@@ -262,12 +262,19 @@
             //获取house
             gethouse() {
                 let user = JSON.parse(sessionStorage.getItem('user'))
+                // let para = {
+                //     pageNumber: this.page - 1,
+                //     name: this.filters.name,
+                //     pageSize:20,
+                //     userId: user.id,
+                //     type: 0
+                // };
                 let para = {
-                    pageNumber: this.page - 1,
+                    page: this.page,
                     name: this.filters.name,
-                    pageSize:20,
+                    'per-page':20,
                     userId: user.id,
-                    type: 0
+                    type: 1
                 };
                 this.listLoading = true;
                 //NProgress.start();
