@@ -274,7 +274,7 @@
                     name: this.filters.name,
                     'per-page':20,
                     userId: user.id,
-                    type: 1
+                    type: 0
                 };
                 this.listLoading = true;
                 //NProgress.start();
